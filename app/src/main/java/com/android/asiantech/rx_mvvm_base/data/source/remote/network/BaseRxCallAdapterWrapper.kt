@@ -1,6 +1,5 @@
-package com.android.asiantech.rx_mvvm_base.data.source.util
+package com.android.asiantech.rx_mvvm_base.data.source.remote.network
 
-import com.android.asiantech.rx_mvvm_base.data.source.remote.network.CustomCallAdapter
 import io.reactivex.*
 import io.reactivex.subjects.MaybeSubject
 import io.reactivex.subjects.SingleSubject

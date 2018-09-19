@@ -1,4 +1,4 @@
-package com.android.asiantech.rx_mvvm_base.data.source.remote.network
+package com.android.asiantech.rx_mvvm_base.broadcast
 
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject

@@ -94,50 +94,39 @@ internal class CustomCallAdapter<T>(private val call: Call<T>, private val retro
         call.enqueue(object : Callback<T> {
             override fun onResponse(call: Call<T>, response: Response<T>) {
                 val code = response.code()
+                val converter: Converter<ResponseBody, ApiException> = retrofit.responseBodyConverter(ApiException::class.java, arrayOfNulls<Annotation>(0))
+                val responseAfterConvert = converter.convert(response.errorBody())
                 try {
                     when (code) {
                         HttpURLConnection.HTTP_OK -> callback.success(call, response)
                         HttpURLConnection.HTTP_UNAUTHORIZED -> {
-                            val converter: Converter<ResponseBody, ApiException> = retrofit.responseBodyConverter(ApiException::class.java, arrayOfNulls<Annotation>(0))
-                            val responseAfterConvert = converter.convert(response.errorBody())
                             responseAfterConvert.statusCode = HttpURLConnection.HTTP_UNAUTHORIZED
                             callback.serverError(responseAfterConvert)
                         }
 
                         HttpURLConnection.HTTP_INTERNAL_ERROR -> {
-                            val converter: Converter<ResponseBody, ApiException> = retrofit.responseBodyConverter(ApiException::class.java, arrayOfNulls<Annotation>(0))
-                            val responseAfterConvert = converter.convert(response.errorBody())
                             callback.serverError(responseAfterConvert)
                         }
 
                         HttpURLConnection.HTTP_BAD_REQUEST -> {
-                            val converter: Converter<ResponseBody, ApiException> = retrofit.responseBodyConverter(ApiException::class.java, arrayOfNulls<Annotation>(0))
-                            val responseAfterConvert = converter.convert(response.errorBody())
                             responseAfterConvert.statusCode = HttpURLConnection.HTTP_BAD_REQUEST
                             callback.clientError(responseAfterConvert)
                         }
 
                         HttpURLConnection.HTTP_NOT_ACCEPTABLE -> {
-                            val converter: Converter<ResponseBody, ApiException> = retrofit.responseBodyConverter(ApiException::class.java, arrayOfNulls<Annotation>(0))
-                            val responseAfterConvert = converter.convert(response.errorBody())
+
                             callback.clientError(responseAfterConvert)
                         }
                         HttpsURLConnection.HTTP_NOT_FOUND -> {
-                            val converter: Converter<ResponseBody, ApiException> = retrofit.responseBodyConverter(ApiException::class.java, arrayOfNulls<Annotation>(0))
-                            val responseAfterConvert = converter.convert(response.errorBody())
                             callback.clientError(responseAfterConvert)
                         }
 
                         HttpsURLConnection.HTTP_FORBIDDEN -> {
-                            val converter: Converter<ResponseBody, ApiException> = retrofit.responseBodyConverter(ApiException::class.java, arrayOfNulls<Annotation>(0))
-                            val responseAfterConvert = converter.convert(response.errorBody())
                             responseAfterConvert.statusCode = HttpsURLConnection.HTTP_FORBIDDEN
                             callback.clientError(responseAfterConvert)
                         }
 
                         HttpsURLConnection.HTTP_CONFLICT -> {
-                            val converter: Converter<ResponseBody, ApiException> = retrofit.responseBodyConverter(ApiException::class.java, arrayOfNulls<Annotation>(0))
-                            val responseAfterConvert = converter.convert(response.errorBody())
                             responseAfterConvert.statusCode = HttpsURLConnection.HTTP_CONFLICT
                             callback.clientError(responseAfterConvert)
                         }

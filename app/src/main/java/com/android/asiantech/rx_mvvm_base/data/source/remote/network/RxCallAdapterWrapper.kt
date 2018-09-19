@@ -1,6 +1,5 @@
 package com.android.asiantech.rx_mvvm_base.data.source.remote.network
 
-import com.android.asiantech.rx_mvvm_base.data.source.util.BaseRxCallAdapterWrapper
 import okhttp3.ResponseBody
 import retrofit2.*
 import java.lang.reflect.Type
