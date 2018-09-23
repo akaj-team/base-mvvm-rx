@@ -13,4 +13,5 @@ class Repository : DataSource {
 
     override fun login() = remoteDataSource.login()
 
+    override fun register(email: String, password: String) = remoteDataSource.register(email, password)
 }

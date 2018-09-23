@@ -13,4 +13,6 @@ class RemoteDataSource(private val api: ApiService) : DataSource {
     constructor() : this(ApiClient.getInstance(null).service)
 
     override fun login() = api.login()
+
+    override fun register(email: String, password: String) = api.register(email, password)
 }
