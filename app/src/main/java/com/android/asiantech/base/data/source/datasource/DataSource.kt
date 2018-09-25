@@ -1,4 +1,4 @@
-package com.android.asiantech.rx_mvvm_base.data.source.datasource
+package com.android.asiantech.base.data.source.datasource
 
 /**
  *

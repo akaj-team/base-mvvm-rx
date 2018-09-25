@@ -1,4 +1,4 @@
-package com.android.asiantech.rx_mvvm_base.ui
+package com.android.asiantech.base.ui
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity

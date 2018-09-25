@@ -1,4 +1,4 @@
-package com.android.asiantech.rx_mvvm_base
+package com.android.asiantech.base
 
 import android.app.Application
 

@@ -1,4 +1,4 @@
-package com.android.asiantech.rx_mvvm_base.broadcast
+package com.android.asiantech.base.broadcast
 
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject

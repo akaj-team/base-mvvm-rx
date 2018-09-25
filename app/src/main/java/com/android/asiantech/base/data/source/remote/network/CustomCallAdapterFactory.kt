@@ -1,4 +1,4 @@
-package com.android.asiantech.rx_mvvm_base.data.source.remote.network
+package com.android.asiantech.base.data.source.remote.network
 
 import retrofit2.CallAdapter
 import retrofit2.Retrofit
