@@ -2,13 +2,10 @@
 
 package com.android.asiantech.rx_mvvm_base.extension
 
-import android.content.Context
 import android.support.annotation.IdRes
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.support.v4.app.FragmentTransaction
-import android.util.DisplayMetrics
-import android.view.WindowManager
 import com.android.asiantech.rx_mvvm_base.ui.base.BaseFragment
 
 /**
@@ -48,11 +45,4 @@ internal fun FragmentActivity.getCurrentFragment(@IdRes containerId: Int) = supp
 
 internal fun FragmentActivity.popFragment() {
     supportFragmentManager.popBackStackImmediate()
-}
-
-internal fun Context.getWidthScreen(): Int {
-    val wm = getSystemService(Context.WINDOW_SERVICE) as? WindowManager
-    val dimension = DisplayMetrics()
-    wm?.defaultDisplay?.getMetrics(dimension)
-    return dimension.widthPixels
 }

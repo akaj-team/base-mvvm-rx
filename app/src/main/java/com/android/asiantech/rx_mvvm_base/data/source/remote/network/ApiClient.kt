@@ -7,6 +7,7 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Protocol
 import okhttp3.ResponseBody
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -38,6 +39,9 @@ open class ApiClient private constructor(url: String? = null) {
 
     private fun createService(): ApiService {
         val httpClientBuilder = OkHttpClient.Builder()
+        val log = HttpLoggingInterceptor()
+        log.level = HttpLoggingInterceptor.Level.BODY
+        httpClientBuilder.addInterceptor(log)
         httpClientBuilder.interceptors().add(Interceptor { chain ->
             val original = chain.request()
             // Request customization: add request headers

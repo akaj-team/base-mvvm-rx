@@ -99,8 +99,8 @@ internal class CustomCallAdapter<T>(private val call: Call<T>, private val retro
                 try {
                     when (code) {
                         HttpURLConnection.HTTP_OK -> callback.success(call, response)
+                        
                         HttpURLConnection.HTTP_UNAUTHORIZED -> {
-                            responseAfterConvert.statusCode = HttpURLConnection.HTTP_UNAUTHORIZED
                             callback.serverError(responseAfterConvert)
                         }
 
@@ -109,7 +109,6 @@ internal class CustomCallAdapter<T>(private val call: Call<T>, private val retro
                         }
 
                         HttpURLConnection.HTTP_BAD_REQUEST -> {
-                            responseAfterConvert.statusCode = HttpURLConnection.HTTP_BAD_REQUEST
                             callback.clientError(responseAfterConvert)
                         }
 
@@ -122,12 +121,10 @@ internal class CustomCallAdapter<T>(private val call: Call<T>, private val retro
                         }
 
                         HttpsURLConnection.HTTP_FORBIDDEN -> {
-                            responseAfterConvert.statusCode = HttpsURLConnection.HTTP_FORBIDDEN
                             callback.clientError(responseAfterConvert)
                         }
 
                         HttpsURLConnection.HTTP_CONFLICT -> {
-                            responseAfterConvert.statusCode = HttpsURLConnection.HTTP_CONFLICT
                             callback.clientError(responseAfterConvert)
                         }
 
@@ -143,13 +140,11 @@ internal class CustomCallAdapter<T>(private val call: Call<T>, private val retro
                 if (t is IOException) {
                     when (t) {
                         is UnknownHostException -> {
-                            val apiException = ApiException("", mutableListOf())
-                            apiException.statusCode = ApiException.NETWORK_ERROR_CODE
+                            val apiException = ApiException("", -1)
                             callback.networkError(apiException)
                         }
                         is SocketTimeoutException -> {
-                            val apiException = ApiException("", mutableListOf())
-                            apiException.statusCode = HttpURLConnection.HTTP_CLIENT_TIMEOUT
+                            val apiException = ApiException("", HttpURLConnection.HTTP_CLIENT_TIMEOUT)
                             callback.networkError(apiException)
                         }
                         else -> callback.networkError(t)

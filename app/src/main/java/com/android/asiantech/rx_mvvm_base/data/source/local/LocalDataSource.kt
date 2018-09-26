@@ -1,16 +1,27 @@
 package com.android.asiantech.rx_mvvm_base.data.source.local
 
-import com.android.asiantech.rx_mvvm_base.data.source.datasource.DataSource
-import com.android.asiantech.rx_mvvm_base.data.source.remote.network.ApiClient
-import com.android.asiantech.rx_mvvm_base.data.source.remote.network.ApiService
+import android.content.Context
+import com.android.asiantech.rx_mvvm_base.BuildConfig
+import com.android.asiantech.rx_mvvm_base.data.source.datasource.LocalDataSource
 
 /**
  *
  * @author at-vinhhuynh
  */
-class LocalDataSource(private val api: ApiService) : DataSource {
+class LocalDataSource(private val context: Context) : LocalDataSource {
 
-    constructor() : this(ApiClient.getInstance(null).service)
+    companion object {
+        private const val KEY_API_TOKEN = "KEY_API_TOKEN"
+    }
 
-    override fun login() = api.login()
+    private val pref by lazy {
+        context.getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE)
+    }
+
+    override fun saveApiToken(apiToken: String) {
+        pref.edit().putString(KEY_API_TOKEN, apiToken).apply()
+    }
+
+    override fun getApiToken(): String = pref.getString(KEY_API_TOKEN, "")
+
 }
