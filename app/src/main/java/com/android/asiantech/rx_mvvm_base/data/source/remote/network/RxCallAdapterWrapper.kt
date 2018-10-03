@@ -21,15 +21,11 @@ class RxCallAdapterWrapper<R>(type: Type, retrofit: Retrofit, wrapped: CallAdapt
             val response: Response<*>? = throwable.response()
             when (response?.code()) {
                 HttpsURLConnection.HTTP_UNAUTHORIZED -> response.errorBody()?.let {
-                    val apiException = converter.convert(it)
-                    apiException.statusCode = HttpsURLConnection.HTTP_UNAUTHORIZED
-                    return apiException
+                    return converter.convert(it)
                 }
 
                 HttpsURLConnection.HTTP_BAD_REQUEST -> response.errorBody()?.let {
-                    return converter.convert(it).apply {
-                        statusCode = HttpsURLConnection.HTTP_BAD_REQUEST
-                    }
+                    return converter.convert(it)
                 }
 
                 HttpsURLConnection.HTTP_INTERNAL_ERROR -> response.errorBody()?.let {
@@ -37,9 +33,7 @@ class RxCallAdapterWrapper<R>(type: Type, retrofit: Retrofit, wrapped: CallAdapt
                 }
 
                 HttpsURLConnection.HTTP_FORBIDDEN -> response.errorBody()?.let {
-                    val apiException = converter.convert(it)
-                    apiException.statusCode = HttpURLConnection.HTTP_FORBIDDEN
-                    return apiException
+                    return converter.convert(it)
                 }
 
                 HttpsURLConnection.HTTP_NOT_FOUND -> response.errorBody()?.let {
@@ -51,24 +45,18 @@ class RxCallAdapterWrapper<R>(type: Type, retrofit: Retrofit, wrapped: CallAdapt
                 }
 
                 HttpsURLConnection.HTTP_CONFLICT -> response.errorBody()?.let {
-                    return converter.convert(it).apply {
-                        statusCode = HttpsURLConnection.HTTP_CONFLICT
-                    }
+                    return converter.convert(it)
                 }
             }
         }
 
         if (throwable is UnknownHostException) {
             // Set message error of this case in activity extension
-            val apiException = ApiException("", mutableListOf())
-            apiException.statusCode = ApiException.NETWORK_ERROR_CODE
-            return apiException
+            return ApiException("UnknownHostException", -1)
         }
 
         if (throwable is SocketTimeoutException) {
-            val apiException = ApiException("", mutableListOf())
-            apiException.statusCode = HttpURLConnection.HTTP_CLIENT_TIMEOUT
-            return apiException
+            return ApiException("SocketTimeoutException", HttpURLConnection.HTTP_CLIENT_TIMEOUT)
         }
 
         return throwable

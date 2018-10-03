@@ -11,6 +11,7 @@ class Repository : DataSource {
 
     private val remoteDataSource: RemoteDataSource = RemoteDataSource()
 
-    override fun login() = remoteDataSource.login()
+    override fun login(email: String, password: String) = remoteDataSource.login(email, password)
 
+    override fun register(email: String, password: String, avatar: String) = remoteDataSource.register(email, password, avatar)
 }
