@@ -1,9 +1,9 @@
 package com.android.asiantech.rx_mvvm_base.ui.comic
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
+import android.widget.TextView
 import com.android.asiantech.rx_mvvm_base.R
 import com.android.asiantech.rx_mvvm_base.data.source.LocalRepository
 import com.android.asiantech.rx_mvvm_base.data.source.Repository
@@ -16,6 +16,10 @@ import com.android.asiantech.rx_mvvm_base.ui.base.BaseActivity
 class ComicDetailActivity : BaseActivity() {
 
     private lateinit var progressBar: ProgressBar
+    private lateinit var tvComicName: TextView
+    private lateinit var tvComicIntroduction: TextView
+    private lateinit var tvAuthor: TextView
+
     private lateinit var viewModel: ComicDetailVMContract
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +29,13 @@ class ComicDetailActivity : BaseActivity() {
     }
 
     private fun init() {
+        // Init views
         progressBar = findViewById(R.id.progressBar)
+        tvComicName = findViewById(R.id.tvComicName)
+        tvComicIntroduction = findViewById(R.id.tvComicIntroduction)
+        tvAuthor = findViewById(R.id.tvAuthor)
+
+        // Init viewModel
         viewModel = ComicDetailViewModel(Repository(), LocalRepository(this))
         viewModel.onProgressBarStatus()
                 .observeOnUiThread()
@@ -36,8 +46,9 @@ class ComicDetailActivity : BaseActivity() {
     }
 
     private fun updateUI(comicResponse: ComicResponse) {
-        // TODO:
-        Log.d("ComicDetailActivity", comicResponse.description)
+        tvComicName.text = comicResponse.name
+        tvComicIntroduction.text = "Introduction: " + comicResponse.description
+        tvAuthor.text = "Author: " + comicResponse.author
     }
 
     private fun onProgressBarStatus(show: Boolean) {
