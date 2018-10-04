@@ -20,6 +20,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.MainActivity" />
+        <activity
+            android:name=".ui.comic.ComicDetailActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
