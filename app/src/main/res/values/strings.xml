@@ -12,4 +12,5 @@
     <string name="ok">OK</string>
     <string name="error">Error</string>
     <string name="success">Success</string>
+    <string name="search_hint">Search comic</string>
 </resources>
