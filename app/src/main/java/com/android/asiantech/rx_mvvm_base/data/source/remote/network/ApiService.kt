@@ -23,5 +23,5 @@ interface ApiService {
                  @Field("avatar") avatar: String): Single<SignUpResponse>
 
     @GET("v1/comic/detail/detail.php")
-    fun getComic(@Query("id") id: Int): ComicResponse
+    fun getComic(@Query("id") id: Int): Single<ComicResponse>
 }

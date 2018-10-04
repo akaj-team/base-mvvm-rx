@@ -3,6 +3,7 @@ package com.android.asiantech.rx_mvvm_base.data.source
 import com.android.asiantech.rx_mvvm_base.data.model.Comic
 import com.android.asiantech.rx_mvvm_base.data.source.datasource.DataSource
 import com.android.asiantech.rx_mvvm_base.data.source.remote.RemoteDataSource
+import com.android.asiantech.rx_mvvm_base.data.source.remote.response.ComicResponse
 import io.reactivex.Single
 
 /**
@@ -17,5 +18,5 @@ class Repository : DataSource {
 
     override fun register(email: String, password: String, avatar: String) = remoteDataSource.register(email, password, avatar)
 
-    override fun getComic(comicId: Int): Single<Comic> = remoteDataSource.getComic(comicId)
+    override fun getComic(comicId: Int): Single<ComicResponse> = remoteDataSource.getComic(comicId)
 }
