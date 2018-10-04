@@ -9,6 +9,9 @@ import android.view.Menu
 import android.view.MenuItem
 import com.android.asiantech.rx_mvvm_base.R
 import com.android.asiantech.rx_mvvm_base.ui.base.BaseActivity
+import com.android.asiantech.rx_mvvm_base.ui.main.favorite.FavoriteFragment
+import com.android.asiantech.rx_mvvm_base.ui.main.home.HomeFragment
+import com.android.asiantech.rx_mvvm_base.ui.main.setting.SettingFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -31,13 +34,24 @@ class MainActivity : BaseActivity() {
     }
 
     private fun doMySearch(query: String) {
-
     }
 
     private fun initView() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setTitle(R.string.home)
+        supportActionBar?.setTitle(R.string.title_home)
+
+        val adapter = MainViewPagerAdapter(supportFragmentManager)
+        adapter.addFrag(HomeFragment(), getString(R.string.title_home))
+        adapter.addFrag(FavoriteFragment(), getString(R.string.title_favorite))
+        adapter.addFrag(SettingFragment(), getString(R.string.title_setting))
+        viewPager.adapter = adapter
+        tabLayout.setupWithViewPager(viewPager)
+
+        val tabIcons = intArrayOf(R.drawable.ic_home, R.drawable.ic_favorite, R.drawable.ic_setting)
+        tabLayout.getTabAt(0)?.setIcon(tabIcons[0]);
+        tabLayout.getTabAt(1)?.setIcon(tabIcons[1]);
+        tabLayout.getTabAt(2)?.setIcon(tabIcons[2]);
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

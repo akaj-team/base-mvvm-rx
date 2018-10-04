@@ -13,6 +13,9 @@
     <string name="error">Error</string>
     <string name="success">Success</string>
     <string name="search_hint">Search comic</string>
-    <string name="home">Home</string>
     <string name="search">Search</string>
+
+    <string name="title_home">Home</string>
+    <string name="title_favorite">Favorite</string>
+    <string name="title_setting">Setting</string>
 </resources>
