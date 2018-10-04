@@ -6,9 +6,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.SearchView
 import android.view.Menu
+import android.view.MenuItem
 import com.android.asiantech.rx_mvvm_base.R
 import com.android.asiantech.rx_mvvm_base.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : BaseActivity() {
 
@@ -35,19 +37,24 @@ class MainActivity : BaseActivity() {
     private fun initView() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setTitle(R.string.home)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        // Inflate the options menu from XML
         val inflater = menuInflater
         inflater.inflate(R.menu.options_menu, menu)
 
-        // Get the SearchView and set the searchable configuration
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         (menu?.findItem(R.id.menu_search)?.actionView as SearchView).apply {
-            // Assumes current activity is the searchable activity
             setSearchableInfo(searchManager.getSearchableInfo(componentName))
-            setIconifiedByDefault(false) // Do not iconify the widget; expand it by default
+        }
+
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == android.R.id.home) {
+            finish()
         }
 
         return true
