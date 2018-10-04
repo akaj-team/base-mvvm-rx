@@ -8,7 +8,6 @@ import io.reactivex.subjects.BehaviorSubject
 class ComicDetailViewModel(private val repository: Repository) : ComicDetailVMContract {
 
     private val progressBarStatus = BehaviorSubject.create<Boolean>()
-    private val errorMessageStatus = BehaviorSubject.create<String>()
 
     override fun getComicDetail(comicId: Int): Single<ComicResponse> = repository.getComic(comicId)
             .doOnSubscribe {
@@ -18,6 +17,4 @@ class ComicDetailViewModel(private val repository: Repository) : ComicDetailVMCo
             }
 
     override fun onProgressBarStatus(): BehaviorSubject<Boolean> = progressBarStatus
-
-    override fun onErrorMessageStatus(): BehaviorSubject<String> = errorMessageStatus
 }

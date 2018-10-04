@@ -29,7 +29,9 @@ class ComicDetailActivity : BaseActivity() {
         viewModel.onProgressBarStatus()
                 .observeOnUiThread()
                 .subscribe(this::onProgressBarStatus)
-        viewModel.getComicDetail(100).observeOnUiThread().subscribe(this::updateUI, this::onErrorMessageStatus)
+        viewModel.getComicDetail(100)
+                .observeOnUiThread()
+                .subscribe(this::updateUI, this::onErrorMessageStatus)
     }
 
     private fun updateUI(comicResponse: ComicResponse) {
