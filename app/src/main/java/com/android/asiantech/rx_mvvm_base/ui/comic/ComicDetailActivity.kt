@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import com.android.asiantech.rx_mvvm_base.R
+import com.android.asiantech.rx_mvvm_base.data.source.LocalRepository
 import com.android.asiantech.rx_mvvm_base.data.source.Repository
 import com.android.asiantech.rx_mvvm_base.data.source.remote.network.ApiException
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.ComicResponse
@@ -20,16 +21,16 @@ class ComicDetailActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comic_detail)
-        progressBar = findViewById(R.id.progressBar)
-        viewModel = ComicDetailViewModel(Repository())
+        init()
     }
 
-    override fun onResume() {
-        super.onResume()
+    private fun init() {
+        progressBar = findViewById(R.id.progressBar)
+        viewModel = ComicDetailViewModel(Repository(), LocalRepository(this))
         viewModel.onProgressBarStatus()
                 .observeOnUiThread()
                 .subscribe(this::onProgressBarStatus)
-        viewModel.getComicDetail(100)
+        viewModel.getComicDetail(1)
                 .observeOnUiThread()
                 .subscribe(this::updateUI, this::onErrorMessageStatus)
     }
