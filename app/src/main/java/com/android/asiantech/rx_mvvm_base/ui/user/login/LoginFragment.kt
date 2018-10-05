@@ -15,7 +15,7 @@ import com.android.asiantech.rx_mvvm_base.data.source.remote.network.ApiExceptio
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.LoginResponse
 import com.android.asiantech.rx_mvvm_base.extension.observeOnUiThread
 import com.android.asiantech.rx_mvvm_base.extension.showAlert
-import com.android.asiantech.rx_mvvm_base.ui.MainActivity
+import com.android.asiantech.rx_mvvm_base.ui.main.MainActivity
 import com.android.asiantech.rx_mvvm_base.ui.base.BaseFragment
 import com.android.asiantech.rx_mvvm_base.ui.user.UserActivity
 import kotlinx.android.synthetic.main.fragment_login.*
