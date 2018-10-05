@@ -2,7 +2,7 @@
 
 ## Base URL: https://at-android-comic.000webhostapp.com/
 
-### UPLOAD
+## UPLOAD
 
 ### Upload image: api/v1/upload/image/
 
@@ -65,6 +65,158 @@
 
 #### Method: GET
 
+|Param|Type|Max Length|Note|Require|
+|---|---|---|---|---|
+|access-token|String||Header|Yes|
+
+### Result
+
+```
+{
+     "avatar" : "http://",
+     "user-name": "user-name",
+     "nick-name": "nick-name",
+     "rate-count": 1
+}
+```
+
+## COMIC
+
+### 1. Home: api/v1/comic/home/home.php
+
+#### Method: GET
+
+|Param|Type|Max Length|Default|Note|Require|
+|---|---|---|---|---|---|
+|access-token|String|||Header|Yes|
+|page|Interge||1|Page to load|No|
+
+#### Result - Max 50 comics each page.
+```
+{
+    "next_page_flag": false,
+    "result": [
+        {
+            "id": 1,
+            "name": "Conan",
+            "description": "Tóm tắt câu chuyện.",
+            "author": "Gosho Aoyama",
+            "view_count": 0,
+            "like_count": 0,
+            "image": "http://st.thichtruyentranh.com/images/icon/0004/conan1416865530.jpg"
+        }
+    ]
+}
+```
+
+### 2. Comic Detail: api/v1/comic/detail/detail.php
+
+#### Method: GET
+
+|Param|Type|Max Length|Default|Note|Require|
+|---|---|---|---|---|---|
+|access-token|String|||Header|Yes|
+|id|Interge|||Id of target comic|Yes|
+
+#### Result:
+
+```
+{
+    "id": 1,
+    "name": "Conan",
+    "description": "Tóm tắt câu chuyện.",
+    "author": "Gosho Aoyama",
+    "view_count": 0,
+    "like_count": 0,
+    "image": "http://st.thichtruyentranh.com/images/icon/0004/conan1416865530.jpg"
+}
+```
+
+### 3. Comic Chapter List: api/v1/comic/chapter/chapters.php
+
+#### Method: GET
+
+|Param|Type|Max Length|Default|Note|Require|
+|---|---|---|---|---|---|
+|access-token|String|||Header|Yes|
+|id|Interge|||Id of target comic|Yes|
+|page|Interge||1|Page to load|No|
+
+#### Result
+```
+{
+    "next_page_flag": false,
+    "result": [
+        {
+            "id": 1,
+            "comic_id": 1,
+            "name": "Mở đầu",
+            "position": 1,
+            "viewcount": 0,
+            "image": ""
+        }
+    ]
+}
+```
+
+### 4. Chapter content: api/v1/comic/chapter/detail/detail.php
+
+#### Method: GET
+
+|Param|Type|Max Length|Default|Note|Require|
+|---|---|---|---|---|---|
+|access-token|String|||Header|Yes|
+|id|Interge|||Id of target chapter|Yes|
+
+#### Result
+
+```
+{
+    "result": [
+        {
+            "id": 1,
+            "position": 1,
+            "image": "http://uptruyen.com/stream/cloud_link/0000/0000/0000/493/0000/0000/0565/5659715.006.jpg"
+        }
+    ]
+}
+```
+
+### 5. Comic star: api/v1/comic/favorite/star.php
+
+#### Method: POST
+
+|Param|Type|Max Length|Note|Require|
+|---|---|---|---|---|
+|access-token|String||Header|Yes|
+|id|Interge||Id of target comic|Yes|
+
+
+#### Result
+
+```
+{
+    "success": true
+}
+```
+
+### 6. Comic Unstar: api/v1/comic/favorite/unstar.php
+
+#### Method: POST
+
+|Param|Type|Max Length|Note|Require|
+|---|---|---|---|---|
+|access-token|String||Header|Yes|
+|id|Interge||Id of target comic|Yes|
+
+
+#### Result
+
+```
+{
+    "success": true
+}
+```
 |Param|Type|Max Length|Note|Require|
 |---|---|---|---|---|
 |access-token|String||Header|Yes|

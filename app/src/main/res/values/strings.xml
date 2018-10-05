@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">rx-mvvm-base</string>
+    <string name="registerFragmentTvAccountRegisterTitle">Account Registration</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="register">Register</string>
+    <string name="backToLogin"><u>Back to login</u></string>
+    <string name="loginFragmentTvWelcomeTitle">Welcome</string>
+    <string name="signUp">Sign up</string>
+    <string name="login">Login</string>
+    <string name="ok">OK</string>
+    <string name="error">Error</string>
+    <string name="success">Success</string>
+    <string name="search_hint">Search comic</string>
+    <string name="search">Search</string>
+
+    <string name="title_home">Home</string>
+    <string name="title_favorite">Favorite</string>
+    <string name="title_setting">Setting</string>
 </resources>
