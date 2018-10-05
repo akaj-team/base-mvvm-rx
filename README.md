@@ -61,7 +61,24 @@
 }
 
 ```
+### 3. Profile: api/v1/user/profile.php
 
+#### Method: GET
+
+|Param|Type|Max Length|Note|Require|
+|---|---|---|---|---|
+|access-token|String||Header|Yes|
+
+### Result
+
+```
+{
+     "avatar" : "http://",
+     "user-name": "user-name",
+     "nick-name": "nick-name",
+     "rate-count": 1
+}
+```
 
 ## API EXCEPTION
 
