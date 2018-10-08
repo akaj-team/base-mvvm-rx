@@ -68,13 +68,14 @@
 |Param|Type|Max Length|Note|Require|
 |---|---|---|---|---|
 |access-token|String||Header|Yes|
+|id|String||use id on case get other user profi|No|
 
 ### Result
 
 ```
 {
      "avatar" : "http://",
-     "user-name": "user-name",
+     "user-name": "user-name",le
      "nick-name": "nick-name",
      "rate-count": 1
 }
