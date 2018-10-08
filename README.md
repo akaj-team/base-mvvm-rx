@@ -1,4 +1,4 @@
-#AT ANDROID COMIC API DOCUMENT
+# AT ANDROID COMIC API DOCUMENT
 
 ## Base URL: https://at-android-comic.000webhostapp.com/
 
@@ -60,6 +60,24 @@
     "access_token": "ff10e81b0021496a2f2b230e448abf41f05994ddbfca1a97997cfd22a8b329a0"
 }
 
+```
+### 3. Profile: api/v1/user/profile.php
+
+#### Method: GET
+
+|Param|Type|Max Length|Note|Require|
+|---|---|---|---|---|
+|access-token|String||Header|Yes|
+
+### Result
+
+```
+{
+     "avatar" : "http://",
+     "user-name": "user-name",
+     "nick-name": "nick-name",
+     "rate-count": 1
+}
 ```
 
 ## COMIC
@@ -199,26 +217,30 @@
     "success": true
 }
 ```
+|Param|Type|Max Length|Note|Require|
+|---|---|---|---|---|
+|access-token|String||Header|Yes|
 
-## API EXCEPTION
-
-### Normal Error
-#### Status code: 400 BAD REQUEST
-#### Model:
+### Result
 
 ```
 {
-    "code": 400,
-    "message": "Thiếu dữ liệu."
+     "avatar" : "http://",
+     "user-name": "user-name",
+     "nick-name": "nick-name",
+     "rate-count": 1
 }
 ```
 
-### UnAuthorizion
-#### Status code: 401 UNAUTHORIZED
-#### Model:
+## API EXCEPTION
+
+### Status code: 678
+
+### Model
+
 ```
 {
-    "code": 401,
-    "message": "Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại để tiếp tục."
+    "code": 678,
+    "message": "Thiếu dữ liệu."
 }
 ```
