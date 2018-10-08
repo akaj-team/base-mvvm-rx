@@ -2,8 +2,6 @@ package com.android.asiantech.rx_mvvm_base.ui.comic
 
 import android.os.Bundle
 import android.view.View
-import android.widget.ProgressBar
-import android.widget.TextView
 import com.android.asiantech.rx_mvvm_base.R
 import com.android.asiantech.rx_mvvm_base.data.source.LocalRepository
 import com.android.asiantech.rx_mvvm_base.data.source.Repository
@@ -12,13 +10,9 @@ import com.android.asiantech.rx_mvvm_base.data.source.remote.response.ComicRespo
 import com.android.asiantech.rx_mvvm_base.extension.observeOnUiThread
 import com.android.asiantech.rx_mvvm_base.extension.showAlert
 import com.android.asiantech.rx_mvvm_base.ui.base.BaseActivity
+import kotlinx.android.synthetic.main.activity_comic_detail.*
 
 class ComicDetailActivity : BaseActivity() {
-
-    private lateinit var progressBar: ProgressBar
-    private lateinit var tvComicName: TextView
-    private lateinit var tvComicIntroduction: TextView
-    private lateinit var tvAuthor: TextView
 
     private lateinit var viewModel: ComicDetailVMContract
 
@@ -29,12 +23,6 @@ class ComicDetailActivity : BaseActivity() {
     }
 
     private fun init() {
-        // Init views
-        progressBar = findViewById(R.id.progressBar)
-        tvComicName = findViewById(R.id.tvComicName)
-        tvComicIntroduction = findViewById(R.id.tvComicIntroduction)
-        tvAuthor = findViewById(R.id.tvAuthor)
-
         // Init viewModel
         viewModel = ComicDetailViewModel(Repository(), LocalRepository(this))
         viewModel.onProgressBarStatus()

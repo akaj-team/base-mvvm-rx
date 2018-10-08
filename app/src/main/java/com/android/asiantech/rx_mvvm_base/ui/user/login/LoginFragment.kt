@@ -15,7 +15,6 @@ import com.android.asiantech.rx_mvvm_base.data.source.remote.network.ApiExceptio
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.LoginResponse
 import com.android.asiantech.rx_mvvm_base.extension.observeOnUiThread
 import com.android.asiantech.rx_mvvm_base.extension.showAlert
-import com.android.asiantech.rx_mvvm_base.ui.main.MainActivity
 import com.android.asiantech.rx_mvvm_base.ui.base.BaseFragment
 import com.android.asiantech.rx_mvvm_base.ui.comic.ComicDetailActivity
 import com.android.asiantech.rx_mvvm_base.ui.user.UserActivity
@@ -106,7 +105,8 @@ class LoginFragment : BaseFragment() {
 
     private fun handleLoginSuccess(loginResponse: LoginResponse) {
         viewModel.saveApiToken(loginResponse.accessToken)
-        startActivityForResult(Intent(context, MainActivity::class.java), REQUEST_CODE_MAIN)
+//        startActivityForResult(Intent(context, MainActivity::class.java), REQUEST_CODE_MAIN)
+        startActivityForResult(Intent(context, ComicDetailActivity::class.java), REQUEST_CODE_MAIN)
     }
 
     private fun handleLoginError(throwable: Throwable) {
