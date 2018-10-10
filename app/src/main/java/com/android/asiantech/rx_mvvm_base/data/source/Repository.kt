@@ -14,4 +14,6 @@ class Repository : DataSource {
     override fun login(email: String, password: String) = remoteDataSource.login(email, password)
 
     override fun register(email: String, password: String, avatar: String) = remoteDataSource.register(email, password, avatar)
+
+    override fun getComics(page: Int) = remoteDataSource.getComics(page)
 }

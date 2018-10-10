@@ -1,11 +1,10 @@
 package com.android.asiantech.rx_mvvm_base.data.source.remote.network
 
+import com.android.asiantech.rx_mvvm_base.data.source.remote.response.HomeResponse
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.LoginResponse
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.SignUpResponse
 import io.reactivex.Single
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
 
 /**
  *
@@ -22,4 +21,7 @@ interface ApiService {
     @POST("v1/user/signup/signup.php")
     fun register(@Field("email") email: String, @Field("password") password: String,
                  @Field("avatar") avatar: String): Single<SignUpResponse>
+
+    @GET("v1/comic/home/home.php")
+    fun getComics(@Query("page") page: Int): Single<HomeResponse>
 }

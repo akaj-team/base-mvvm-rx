@@ -15,4 +15,6 @@ class RemoteDataSource(private val api: ApiService) : DataSource {
     override fun login(email: String, password: String) = api.login(email, password)
 
     override fun register(email: String, password: String, avatar: String) = api.register(email, password, avatar)
+
+    override fun getComics(page: Int) = api.getComics(page)
 }
