@@ -1,9 +1,7 @@
 package com.android.asiantech.rx_mvvm_base.ui.main.home
 
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
 import com.android.asiantech.rx_mvvm_base.R
@@ -27,21 +25,36 @@ class HomeAdapter(private val comics: MutableList<Comic>) : RecyclerView.Adapter
     }
 
     internal var onItemClicked: (position: Int) -> Unit = {}
+    internal var onItemDoubleClicked: (position: Int) -> Unit = {}
 
     /**
      * Item view holder for home recycler view.
      */
     inner class HomeItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        init {
-            itemView.setOnClickListener {
+        private val gestureDetector = GestureDetector(itemView.context, object : GestureDetector.SimpleOnGestureListener() {
+            override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
                 onItemClicked.invoke(adapterPosition)
+                return true
             }
-        }
+
+            override fun onDoubleTap(e: MotionEvent?): Boolean {
+                onItemDoubleClicked.invoke(adapterPosition)
+                return true
+            }
+        })
 
         private var tvTitle: TextView = itemView.findViewById(R.id.tvTitle)
         private var tvDescription: TextView = itemView.findViewById(R.id.tvDescription)
         private var imgHome: ImageView = itemView.findViewById(R.id.imgHome)
+
+
+        init {
+            imgHome.setOnTouchListener { _, event ->
+                gestureDetector.onTouchEvent(event)
+                true
+            }
+        }
 
         internal fun onBind() {
             val comic = comics[adapterPosition]

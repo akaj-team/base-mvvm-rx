@@ -28,6 +28,7 @@ class HomeFragment : BaseFragment() {
         viewModel = HomeViewModel(Repository())
         adapter = HomeAdapter(viewModel.getComics())
         adapter.onItemClicked = this::handleItemClicked
+        adapter.onItemDoubleClicked = this::handleItemDoubleClicked
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -58,7 +59,23 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun handleItemClicked(position: Int) {
-        //Todo: Handle later
+        //Todo: Open Detail Screen
+    }
+
+    private fun handleItemDoubleClicked(position: Int) {
+        if (viewModel.isFavorite(position)) {
+            viewModel.unFavorite(position)
+                    .observeOnUiThread()
+                    .subscribe({
+                        handleUnFavoriteSuccess(it.success, position)
+                    }, this::handleFavoriteError)
+        } else {
+            viewModel.favorite(position)
+                    .observeOnUiThread()
+                    .subscribe({
+                        handleFavoriteSuccess(it.success, position)
+                    }, this::handleFavoriteError)
+        }
     }
 
     private fun handleDisplayDialog(status: Boolean) {
@@ -70,6 +87,22 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun handleLoadComicsError(error: Throwable) {
+        Toast.makeText(activity, error.message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun handleFavoriteSuccess(success: Boolean, position: Int) {
+        if (success) {
+            //Todo: Handle later
+        }
+    }
+
+    private fun handleUnFavoriteSuccess(success: Boolean, position: Int) {
+        if (success) {
+            //Todo: Handle later
+        }
+    }
+
+    private fun handleFavoriteError(error: Throwable) {
         Toast.makeText(activity, error.message, Toast.LENGTH_SHORT).show()
     }
 }
