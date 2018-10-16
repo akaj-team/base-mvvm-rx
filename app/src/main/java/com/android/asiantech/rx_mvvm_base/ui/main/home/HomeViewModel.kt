@@ -11,6 +11,12 @@ import io.reactivex.subjects.BehaviorSubject
  */
 class HomeViewModel(private val repository: Repository) : HomeVMContract {
 
+    companion object {
+        private const val VISIBLE_THRESHOLD = 5
+    }
+
+    private var isLoading = false
+    private var nextPageFlag = false
     private var currentPage = 1
     private val comics = mutableListOf<Comic>()
     private val progressDialogStatus: BehaviorSubject<Boolean> = BehaviorSubject.create()
@@ -21,9 +27,10 @@ class HomeViewModel(private val repository: Repository) : HomeVMContract {
         return repository.getComics(currentPage)
                 .doOnSubscribe {
                     progressDialogStatus.onNext(true)
+                    isLoading = true
                 }
                 .doOnSuccess {
-                    progressDialogStatus.onNext(false)
+                    isLoading = false
                     if (currentPage == 1) {
                         comics.clear()
                     }
@@ -34,6 +41,9 @@ class HomeViewModel(private val repository: Repository) : HomeVMContract {
                         comics.addAll(it.comics)
                     }
                 }
+                .doFinally {
+                    progressDialogStatus.onNext(false)
+                }
     }
 
     override fun updateProgressDialogStatus() = progressDialogStatus
@@ -43,4 +53,13 @@ class HomeViewModel(private val repository: Repository) : HomeVMContract {
     override fun unFavorite(position: Int) = repository.unFavorite(comics[position].id)
 
     override fun isFavorite(position: Int) = comics[position].viewCount > 0
+
+    override fun loadMore(visibleItemCount: Int, totalItemCount: Int, firstVisibleItem: Int) {
+        if (canLoadMore(visibleItemCount, totalItemCount, firstVisibleItem)) {
+            getComicsFromServer()
+        }
+    }
+
+    private fun canLoadMore(visibleItemCount: Int, totalItemCount: Int, firstVisibleItem: Int) =
+            !isLoading && nextPageFlag && (visibleItemCount + firstVisibleItem + VISIBLE_THRESHOLD >= totalItemCount)
 }

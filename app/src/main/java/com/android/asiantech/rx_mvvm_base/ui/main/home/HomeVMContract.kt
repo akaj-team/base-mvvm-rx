@@ -41,4 +41,10 @@ interface HomeVMContract {
      * check favorite
      */
     fun isFavorite(position: Int): Boolean
+
+    /**
+     * Handle load more
+     */
+    fun loadMore(visibleItemCount: Int, totalItemCount: Int, firstVisibleItem: Int)
+
 }
