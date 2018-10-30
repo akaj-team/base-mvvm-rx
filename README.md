@@ -104,7 +104,7 @@
             "author": "Gosho Aoyama",
             "view_count": 0,
             "like_count": 0,
-            "is_liked": true,
+            "like_flag": true,
             "image": "http://st.thichtruyentranh.com/images/icon/0004/conan1416865530.jpg"
         }
     ]
@@ -132,7 +132,7 @@
             "author": "Gosho Aoyama",
             "view_count": 0,
             "like_count": 0,
-            "is_liked": true,
+            "like_flag": true,
             "image": "http://st.thichtruyentranh.com/images/icon/0004/conan1416865530.jpg"
         }
     ]
@@ -158,7 +158,7 @@
     "author": "Gosho Aoyama",
     "view_count": 0,
     "like_count": 0,
-    "is_liked": true,
+    "like_flag": true,
     "image": "http://st.thichtruyentranh.com/images/icon/0004/conan1416865530.jpg"
 }
 ```
