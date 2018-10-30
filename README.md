@@ -111,7 +111,7 @@
 }
 ```
 
-### 2. Favorite: api/v1/user/favorite.php
+### 2. Favorite: api/v1/user/favorite/favorite.php
 
 #### Method: GET
 
