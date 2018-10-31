@@ -10,7 +10,7 @@ import com.android.asiantech.rx_mvvm_base.data.source.LocalRepository
 import com.android.asiantech.rx_mvvm_base.ui.base.BaseFragment
 import com.android.asiantech.rx_mvvm_base.ui.main.home.HomeFragment
 import com.android.asiantech.rx_mvvm_base.ui.user.UserActivity
-import com.uniqlo.circle.extension.replaceFragmentSafely
+import com.android.asiantech.rx_mvvm_base.extension.replaceFragmentSafely
 import kotlinx.android.synthetic.main.fragment_setting.*
 
 /**

@@ -7,7 +7,7 @@ import com.android.asiantech.rx_mvvm_base.extension.replaceFragment
 import com.android.asiantech.rx_mvvm_base.ui.base.BaseActivity
 import com.android.asiantech.rx_mvvm_base.ui.user.login.LoginFragment
 import com.android.asiantech.rx_mvvm_base.ui.user.register.RegisterFragment
-import com.uniqlo.circle.extension.animSlideInRightSlideOutRight
+import com.android.asiantech.rx_mvvm_base.extension.animSlideInRightSlideOutRight
 
 /**
  *

@@ -1,4 +1,4 @@
-package com.uniqlo.circle.extension
+package com.android.asiantech.rx_mvvm_base.extension
 
 import android.support.annotation.AnimRes
 import android.support.annotation.IdRes
