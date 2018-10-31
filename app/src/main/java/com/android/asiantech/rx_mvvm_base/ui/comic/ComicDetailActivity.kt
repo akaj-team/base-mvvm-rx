@@ -39,12 +39,8 @@ class ComicDetailActivity : BaseActivity() {
         tvAuthor.text = "Author: " + comicResponse.author
     }
 
-    private fun onProgressBarStatus(show: Boolean) {
-        if (show) {
-            progressBar.visibility = View.VISIBLE
-        } else {
-            progressBar.visibility = View.GONE
-        }
+    private fun onProgressBarStatus(isShow: Boolean) {
+        progressBar.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
     private fun onErrorMessageStatus(error: Throwable) {
