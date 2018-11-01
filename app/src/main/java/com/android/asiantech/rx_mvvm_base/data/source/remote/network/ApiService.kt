@@ -22,6 +22,6 @@ interface ApiService {
     fun register(@Field("email") email: String, @Field("password") password: String,
                  @Field("avatar") avatar: String): Single<SignUpResponse>
 
-    @GET("/v1/user/favorite/favorite.php")
+    @GET("v1/user/favorite/favorite.php")
     fun getListFavorites(@Query("page") page: Int): Single<ListFavoritesResponse>
 }

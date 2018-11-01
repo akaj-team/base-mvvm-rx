@@ -14,7 +14,9 @@ interface FavoriteContract {
 
     fun getFavoriteComicsFromServer(): Single<ListFavoritesResponse>
 
-    fun progressDialogState(): BehaviorSubject<Boolean>
+    fun progressDialogStatus(): BehaviorSubject<Boolean>
+
+    fun noResultStatus(): BehaviorSubject<Boolean>
 
     fun loadMore(visibleItemCount: Int, totalItemCount: Int, firstVisibleItem: Int)
 }

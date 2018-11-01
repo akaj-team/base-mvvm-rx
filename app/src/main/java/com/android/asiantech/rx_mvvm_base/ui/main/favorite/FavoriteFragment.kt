@@ -40,8 +40,10 @@ class FavoriteFragment : BaseFragment() {
 
     override fun onBindViewModel() {
         addDisposables(
-                viewModel.progressDialogState()
+                viewModel.progressDialogStatus()
                         .observeOnUiThread().subscribe(this::handleProgressDialogState),
+                viewModel.noResultStatus()
+                        .observeOnUiThread().subscribe(this::handleNoResultState),
                 viewModel.getFavoriteComicsFromServer()
                         .observeOnUiThread()
                         .subscribe({ handleGetFavoriteComicsFromServerSuccess() }, this::handleGetFavoriteComicsError)
@@ -74,6 +76,11 @@ class FavoriteFragment : BaseFragment() {
 
     private fun handleProgressDialogState(isShow: Boolean) {
         progressDialog.apply { if (isShow) show() else dismiss() }
+    }
+
+    private fun handleNoResultState(isNoResult: Boolean) {
+        tvNoResult.visibility = if (isNoResult) View.VISIBLE else View.GONE
+        recyclerFavorites.visibility = if (isNoResult) View.GONE else View.VISIBLE
     }
 
     private fun handleGetFavoriteComicsFromServerSuccess() {

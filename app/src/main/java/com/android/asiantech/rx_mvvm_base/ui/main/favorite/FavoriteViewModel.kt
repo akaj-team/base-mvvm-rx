@@ -21,6 +21,7 @@ class FavoriteViewModel(private val repository: Repository) : FavoriteContract {
     private var isLoading = false
     private var nextPageFlag = false
     private val progressDialogStatus: BehaviorSubject<Boolean> = BehaviorSubject.create()
+    private val noResultStatus: BehaviorSubject<Boolean> = BehaviorSubject.create()
 
     override fun getFavoriteComics(): List<Comic> = listFavoriteComics
 
@@ -41,13 +42,16 @@ class FavoriteViewModel(private val repository: Repository) : FavoriteContract {
                     if (it.result.isNotEmpty()) {
                         listFavoriteComics.addAll(it.result)
                     }
+                    noResultStatus.onNext(listFavoriteComics.size == 0)
                 }
                 .doFinally {
                     progressDialogStatus.onNext(false)
                 }
     }
 
-    override fun progressDialogState() = progressDialogStatus
+    override fun progressDialogStatus() = progressDialogStatus
+
+    override fun noResultStatus(): BehaviorSubject<Boolean> = noResultStatus
 
     override fun loadMore(visibleItemCount: Int, totalItemCount: Int, firstVisibleItem: Int) {
         if (canLoadMore(visibleItemCount, totalItemCount, firstVisibleItem)) {

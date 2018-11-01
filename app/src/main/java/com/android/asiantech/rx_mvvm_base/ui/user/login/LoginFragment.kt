@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import com.android.asiantech.rx_mvvm_base.R
 import com.android.asiantech.rx_mvvm_base.data.source.LocalRepository
 import com.android.asiantech.rx_mvvm_base.data.source.Repository
+import com.android.asiantech.rx_mvvm_base.data.source.remote.network.ApiClient
 import com.android.asiantech.rx_mvvm_base.data.source.remote.network.ApiException
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.LoginResponse
 import com.android.asiantech.rx_mvvm_base.extension.observeOnUiThread
@@ -105,6 +106,7 @@ class LoginFragment : BaseFragment() {
 
     private fun handleLoginSuccess(loginResponse: LoginResponse) {
         viewModel.saveApiToken(loginResponse.accessToken)
+        ApiClient.getInstance(null).token = loginResponse.accessToken
         startActivityForResult(Intent(context, MainActivity::class.java), REQUEST_CODE_MAIN)
     }
 
