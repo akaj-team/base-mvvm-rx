@@ -3,6 +3,8 @@ package com.android.asiantech.rx_mvvm_base.data.source.remote
 import com.android.asiantech.rx_mvvm_base.data.source.datasource.DataSource
 import com.android.asiantech.rx_mvvm_base.data.source.remote.network.ApiClient
 import com.android.asiantech.rx_mvvm_base.data.source.remote.network.ApiService
+import com.android.asiantech.rx_mvvm_base.data.source.remote.response.ListFavoritesResponse
+import io.reactivex.Single
 
 /**
  *
@@ -15,4 +17,6 @@ class RemoteDataSource(private val api: ApiService) : DataSource {
     override fun login(email: String, password: String) = api.login(email, password)
 
     override fun register(email: String, password: String, avatar: String) = api.register(email, password, avatar)
+
+    override fun getListFavorites(page: Int): Single<ListFavoritesResponse> = api.getListFavorites(page)
 }
