@@ -75,7 +75,7 @@
 ```
 {
      "avatar" : "http://",
-     "user-name": "user-name",le
+     "user-name": "user-name",
      "nick-name": "nick-name",
      "rate-count": 1
 }

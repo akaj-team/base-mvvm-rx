@@ -16,8 +16,8 @@ import com.android.asiantech.rx_mvvm_base.data.source.remote.network.ApiExceptio
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.LoginResponse
 import com.android.asiantech.rx_mvvm_base.extension.observeOnUiThread
 import com.android.asiantech.rx_mvvm_base.extension.showAlert
-import com.android.asiantech.rx_mvvm_base.ui.main.MainActivity
 import com.android.asiantech.rx_mvvm_base.ui.base.BaseFragment
+import com.android.asiantech.rx_mvvm_base.ui.main.MainActivity
 import com.android.asiantech.rx_mvvm_base.ui.user.UserActivity
 import kotlinx.android.synthetic.main.fragment_login.*
 
@@ -31,8 +31,9 @@ class LoginFragment : BaseFragment() {
     private lateinit var progressDialog: ProgressDialog
 
     companion object {
-        private const val REQUEST_CODE_MAIN = 2802
-        fun newInstance() = LoginFragment()
+        internal const val REQUEST_CODE_MAIN = 2802
+
+        internal fun newInstance() = LoginFragment()
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -108,6 +109,7 @@ class LoginFragment : BaseFragment() {
         viewModel.saveApiToken(loginResponse.accessToken)
         ApiClient.getInstance(null).token = loginResponse.accessToken
         startActivityForResult(Intent(context, MainActivity::class.java), REQUEST_CODE_MAIN)
+        activity?.finish()
     }
 
     private fun handleLoginError(throwable: Throwable) {

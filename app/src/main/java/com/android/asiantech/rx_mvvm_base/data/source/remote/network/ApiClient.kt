@@ -1,6 +1,5 @@
 package com.android.asiantech.rx_mvvm_base.data.source.remote.network
 
-import android.util.Log
 import com.android.asiantech.rx_mvvm_base.BuildConfig
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
@@ -54,7 +53,6 @@ open class ApiClient private constructor(url: String? = null) {
             val requestBuilder = original.newBuilder()
                     .method(original.method(), original.body())
             if (token != null) {
-                Log.d("xxx", "token : $token")
                 requestBuilder.addHeader("access-token", "$token")
             }
             if (!isFromUnitTest) {
