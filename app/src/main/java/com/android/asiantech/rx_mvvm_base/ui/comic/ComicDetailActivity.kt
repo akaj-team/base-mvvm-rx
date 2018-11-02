@@ -1,50 +1,18 @@
 package com.android.asiantech.rx_mvvm_base.ui.comic
 
 import android.os.Bundle
-import android.view.View
 import com.android.asiantech.rx_mvvm_base.R
-import com.android.asiantech.rx_mvvm_base.data.source.LocalRepository
-import com.android.asiantech.rx_mvvm_base.data.source.Repository
-import com.android.asiantech.rx_mvvm_base.data.source.remote.network.ApiException
-import com.android.asiantech.rx_mvvm_base.data.source.remote.response.ComicResponse
-import com.android.asiantech.rx_mvvm_base.extension.observeOnUiThread
-import com.android.asiantech.rx_mvvm_base.extension.showAlert
+import com.android.asiantech.rx_mvvm_base.extension.replaceFragment
 import com.android.asiantech.rx_mvvm_base.ui.base.BaseActivity
-import kotlinx.android.synthetic.main.activity_comic_detail.*
+import com.uniqlo.circle.extension.animSlideInRightSlideOutRight
 
 class ComicDetailActivity : BaseActivity() {
 
-    private lateinit var viewModel: ComicDetailVMContract
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_comic_detail)
-        init()
-    }
-
-    private fun init() {
-        // Init viewModel
-        viewModel = ComicDetailViewModel(Repository(), LocalRepository(this))
-        viewModel.onProgressBarStatus()
-                .observeOnUiThread()
-                .subscribe(this::onProgressBarStatus)
-        viewModel.getComicDetail(1)
-                .observeOnUiThread()
-                .subscribe(this::updateUI, this::onErrorMessageStatus)
-    }
-
-    private fun updateUI(comicResponse: ComicResponse) {
-        tvComicName.text = comicResponse.name
-        tvComicIntroduction.text = comicResponse.description
-        tvAuthor.text = comicResponse.author
-    }
-
-    private fun onProgressBarStatus(isShow: Boolean) {
-        progressBar.visibility = if (isShow) View.VISIBLE else View.GONE
-    }
-
-    private fun onErrorMessageStatus(error: Throwable) {
-        val apiException = error as ApiException
-        showAlert(R.string.error, apiException.errorMessage)
+        setContentView(R.layout.activity_user)
+        replaceFragment(R.id.userActivityContainer, ComicDetailFragment(), {
+            it.animSlideInRightSlideOutRight()
+        })
     }
 }
