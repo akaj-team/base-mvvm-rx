@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.android.asiantech.rx_mvvm_base.R
 import com.android.asiantech.rx_mvvm_base.data.source.LocalRepository
 import com.android.asiantech.rx_mvvm_base.extension.addFragment
+import com.android.asiantech.rx_mvvm_base.extension.observeOnUiThread
 import com.android.asiantech.rx_mvvm_base.extension.replaceFragment
 import com.android.asiantech.rx_mvvm_base.ui.base.BaseActivity
 import com.android.asiantech.rx_mvvm_base.ui.main.MainActivity
@@ -23,12 +24,12 @@ class UserActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
         viewModel = UserViewModel(LocalRepository(this))
-        if (viewModel.getAccessToken().isBlank()) {
-            openLoginFragment()
-        } else {
-            startActivityForResult(Intent(this, MainActivity::class.java), LoginFragment.REQUEST_CODE_MAIN)
-            finish()
-        }
+
+        viewModel.loginStatus()
+                .observeOnUiThread()
+                .subscribe(this::handleCheckLogin)
+
+        viewModel.checkLogin()
     }
 
     internal fun openRegisterFragment() {
@@ -41,5 +42,14 @@ class UserActivity : BaseActivity() {
         replaceFragment(R.id.userActivityContainer, LoginFragment.newInstance(), {
             it.animSlideInRightSlideOutRight()
         })
+    }
+
+    private fun handleCheckLogin(isLoggedIn: Boolean) {
+        if (isLoggedIn) {
+            startActivityForResult(Intent(this, MainActivity::class.java), LoginFragment.REQUEST_CODE_MAIN)
+            finish()
+        } else {
+            openLoginFragment()
+        }
     }
 }
