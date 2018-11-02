@@ -3,8 +3,7 @@ package com.android.asiantech.rx_mvvm_base.ui.user.login
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
+import android.support.v4.app.ActivityCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +13,7 @@ import com.android.asiantech.rx_mvvm_base.data.source.Repository
 import com.android.asiantech.rx_mvvm_base.data.source.remote.network.ApiException
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.LoginResponse
 import com.android.asiantech.rx_mvvm_base.extension.observeOnUiThread
+import com.android.asiantech.rx_mvvm_base.extension.onTextChangeListener
 import com.android.asiantech.rx_mvvm_base.extension.showAlert
 import com.android.asiantech.rx_mvvm_base.ui.base.BaseFragment
 import com.android.asiantech.rx_mvvm_base.ui.comic.ComicDetailActivity
@@ -65,48 +65,27 @@ class LoginFragment : BaseFragment() {
             login(edtEmail.text.toString(), edtPassword.text.toString())
         }
 
-        edtEmail.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                viewModel.validateLoginInformation(edtEmail.text.toString(),
-                        edtPassword.text.toString())
-            }
+        edtEmail.onTextChangeListener {
+            viewModel.validateLoginInformation(edtEmail.text.toString(),
+                    edtPassword.text.toString())
+        }
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-        })
-
-        edtPassword.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                viewModel.validateLoginInformation(edtEmail.text.toString(),
-                        edtPassword.text.toString())
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-        })
-    }
-
-    private fun initView() {
-        progressDialog = ProgressDialog(context)
-        progressDialog.setCancelable(false)
-    }
-
-    private fun handleProgressDialogStatus(status: Boolean) {
-        if (status) {
-            progressDialog.show()
-        } else {
-            progressDialog.dismiss()
+        edtPassword.onTextChangeListener {
+            viewModel.validateLoginInformation(edtEmail.text.toString(),
+                    edtPassword.text.toString())
         }
     }
 
+    private fun initView() {
+        progressDialog = ProgressDialog(context, R.style.AppTheme)
+        progressDialog.setCancelable(false)
+    }
+
+    private fun handleProgressDialogStatus(status: Boolean) = if (status) progressDialog.show() else progressDialog.dismiss()
+
     private fun handleLoginSuccess(loginResponse: LoginResponse) {
         viewModel.saveApiToken(loginResponse.accessToken)
-//        startActivityForResult(Intent(context, MainActivity::class.java), REQUEST_CODE_MAIN)
-        startActivityForResult(Intent(context, ComicDetailActivity::class.java), REQUEST_CODE_MAIN)
+        ActivityCompat.startActivityForResult(activity, Intent(context, ComicDetailActivity::class.java), REQUEST_CODE_MAIN, null)
     }
 
     private fun handleLoginError(throwable: Throwable) {
@@ -117,10 +96,11 @@ class LoginFragment : BaseFragment() {
         btnLogin.isEnabled = status
     }
 
+
+    @SuppressWarnings("CheckResult")
     private fun login(email: String, password: String) {
         viewModel.login(email, password)
                 .observeOnUiThread()
-                .subscribe(this::handleLoginSuccess,
-                        this::handleLoginError)
+                .subscribe(this::handleLoginSuccess, this::handleLoginError)
     }
 }

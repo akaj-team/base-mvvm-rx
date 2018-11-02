@@ -1,5 +1,6 @@
 package com.android.asiantech.rx_mvvm_base.ui.user.login
 
+import android.util.Log
 import com.android.asiantech.rx_mvvm_base.data.source.LocalRepository
 import com.android.asiantech.rx_mvvm_base.data.source.Repository
 import com.android.asiantech.rx_mvvm_base.ui.user.register.RegisterViewModel
@@ -25,7 +26,7 @@ class LoginViewModel(private val repository: Repository, private val localReposi
                 processDialogStatus.onNext(true)
             }.doFinally {
                 processDialogStatus.onNext(false)
-            }
+            }.doOnSuccess { Log.e("xxx", Thread.currentThread().name) }
 
     override fun validateLoginInformation(email: String, password: String) {
         if (email.isEmpty()
