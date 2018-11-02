@@ -35,16 +35,12 @@ class ComicDetailActivity : BaseActivity() {
 
     private fun updateUI(comicResponse: ComicResponse) {
         tvComicName.text = comicResponse.name
-        tvComicIntroduction.text = "Introduction: " + comicResponse.description
-        tvAuthor.text = "Author: " + comicResponse.author
+        tvComicIntroduction.text = comicResponse.description
+        tvAuthor.text = comicResponse.author
     }
 
-    private fun onProgressBarStatus(show: Boolean) {
-        if (show) {
-            progressBar.visibility = View.VISIBLE
-        } else {
-            progressBar.visibility = View.GONE
-        }
+    private fun onProgressBarStatus(isShow: Boolean) {
+        progressBar.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
     private fun onErrorMessageStatus(error: Throwable) {
