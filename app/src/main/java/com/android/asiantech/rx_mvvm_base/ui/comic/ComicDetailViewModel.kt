@@ -7,7 +7,7 @@ import com.android.asiantech.rx_mvvm_base.data.source.remote.response.ComicRespo
 import io.reactivex.Single
 import io.reactivex.subjects.BehaviorSubject
 
-class ComicDetailViewModel(private val repository: Repository, private val localRepository: LocalRepository) : ComicDetailVMContract {
+class ComicDetailViewModel(private val repository: Repository) : ComicDetailVMContract {
 
     private val progressBarStatus = BehaviorSubject.create<Boolean>()
 

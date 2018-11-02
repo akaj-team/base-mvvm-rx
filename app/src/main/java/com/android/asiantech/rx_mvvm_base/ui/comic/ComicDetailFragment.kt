@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.android.asiantech.rx_mvvm_base.R
 import com.android.asiantech.rx_mvvm_base.data.model.Comic
-import com.android.asiantech.rx_mvvm_base.data.source.LocalRepository
 import com.android.asiantech.rx_mvvm_base.data.source.Repository
 import com.android.asiantech.rx_mvvm_base.data.source.remote.network.ApiException
 import com.android.asiantech.rx_mvvm_base.extension.observeOnUiThread
@@ -24,7 +23,7 @@ class ComicDetailFragment : BaseFragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // Init viewModel
-        viewModel = ComicDetailViewModel(Repository(), LocalRepository(context))
+        viewModel = ComicDetailViewModel(Repository())
     }
 
     override fun onBindViewModel() {
