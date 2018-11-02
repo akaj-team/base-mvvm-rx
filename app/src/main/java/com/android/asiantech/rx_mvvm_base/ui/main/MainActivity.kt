@@ -34,6 +34,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun doMySearch(query: String) {
+        // TODO search query here
     }
 
     private fun initView() {
