@@ -68,6 +68,7 @@
 |Param|Type|Max Length|Note|Require|
 |---|---|---|---|---|
 |access-token|String||Header|Yes|
+|id|String||use id on case get other user profi|No|
 
 ### Result
 
@@ -103,13 +104,42 @@
             "author": "Gosho Aoyama",
             "view_count": 0,
             "like_count": 0,
+            "like_flag": true,
             "image": "http://st.thichtruyentranh.com/images/icon/0004/conan1416865530.jpg"
         }
     ]
 }
 ```
 
-### 2. Comic Detail: api/v1/comic/detail/detail.php
+### 2. Favorite: api/v1/user/favorite/favorite.php
+
+#### Method: GET
+
+|Param|Type|Max Length|Default|Note|Require|
+|---|---|---|---|---|---|
+|access-token|String|||Header|Yes|
+|page|Interge||1|Page to load|No|
+
+#### Result - Max 50 comics each page.
+```
+{
+    "next_page_flag": false,
+    "result": [
+        {
+            "id": 1,
+            "name": "Conan",
+            "description": "Tóm tắt câu chuyện.",
+            "author": "Gosho Aoyama",
+            "view_count": 0,
+            "like_count": 0,
+            "like_flag": true,
+            "image": "http://st.thichtruyentranh.com/images/icon/0004/conan1416865530.jpg"
+        }
+    ]
+}
+```
+
+### 3. Comic Detail: api/v1/comic/detail/detail.php
 
 #### Method: GET
 
@@ -128,11 +158,12 @@
     "author": "Gosho Aoyama",
     "view_count": 0,
     "like_count": 0,
+    "like_flag": true,
     "image": "http://st.thichtruyentranh.com/images/icon/0004/conan1416865530.jpg"
 }
 ```
 
-### 3. Comic Chapter List: api/v1/comic/chapter/chapters.php
+### 4. Comic Chapter List: api/v1/comic/chapter/chapters.php
 
 #### Method: GET
 
@@ -159,7 +190,7 @@
 }
 ```
 
-### 4. Chapter content: api/v1/comic/chapter/detail/detail.php
+### 5. Chapter content: api/v1/comic/chapter/detail/detail.php
 
 #### Method: GET
 
@@ -182,7 +213,7 @@
 }
 ```
 
-### 5. Comic star: api/v1/comic/favorite/star.php
+### 6. Comic star: api/v1/comic/favorite/star.php
 
 #### Method: POST
 
@@ -200,7 +231,7 @@
 }
 ```
 
-### 6. Comic Unstar: api/v1/comic/favorite/unstar.php
+### 7. Comic Unstar: api/v1/comic/favorite/unstar.php
 
 #### Method: POST
 
