@@ -17,5 +17,5 @@ class Repository : DataSource {
 
     override fun register(email: String, password: String, avatar: String) = remoteDataSource.register(email, password, avatar)
 
-    override fun getComic(token: String, comicId: Int): Single<ComicResponse> = remoteDataSource.getComic(token, comicId)
+    override fun getComic(comicId: Int): Single<ComicResponse> = remoteDataSource.getComic(comicId)
 }
