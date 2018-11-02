@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.android.asiantech.rx_mvvm_base.R
+import com.android.asiantech.rx_mvvm_base.data.model.Comic
 import com.android.asiantech.rx_mvvm_base.data.source.LocalRepository
 import com.android.asiantech.rx_mvvm_base.data.source.Repository
 import com.android.asiantech.rx_mvvm_base.data.source.remote.network.ApiException
-import com.android.asiantech.rx_mvvm_base.data.source.remote.response.ComicResponse
 import com.android.asiantech.rx_mvvm_base.extension.observeOnUiThread
 import com.android.asiantech.rx_mvvm_base.extension.showAlert
 import com.android.asiantech.rx_mvvm_base.ui.base.BaseFragment
@@ -33,15 +33,18 @@ class ComicDetailFragment : BaseFragment() {
                         .observeOnUiThread()
                         .subscribe(this::onProgressBarStatus),
                 viewModel.getComicDetail(1)
+                        .map { it ->
+                            Comic(it)
+                        }
                         .observeOnUiThread()
                         .subscribe(this::updateUI, this::onErrorMessageStatus)
         )
     }
 
-    private fun updateUI(comicResponse: ComicResponse) {
-        tvComicName.text = comicResponse.name
-        tvComicIntroduction.text = comicResponse.description
-        tvAuthor.text = comicResponse.author
+    private fun updateUI(comic: Comic) {
+        tvComicName.text = comic.name
+        tvAuthor.text = comic.author
+        tvComicIntroduction.text = comic.introduction
     }
 
     private fun onProgressBarStatus(isShow: Boolean) {
