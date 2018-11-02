@@ -16,5 +16,5 @@ interface DataSource {
 
     fun register(email: String, password: String, avatar: String): Single<SignUpResponse>
 
-    fun getComic(comicId: Int) : Single<ComicResponse>
+    fun getComic(comicId: Int) : Single<Comic>
 }

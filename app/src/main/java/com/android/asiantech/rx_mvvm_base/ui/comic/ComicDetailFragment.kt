@@ -32,9 +32,6 @@ class ComicDetailFragment : BaseFragment() {
                         .observeOnUiThread()
                         .subscribe(this::onProgressBarStatus),
                 viewModel.getComicDetail(1)
-                        .map { it ->
-                            Comic(it)
-                        }
                         .observeOnUiThread()
                         .subscribe(this::updateUI, this::onErrorMessageStatus)
         )
