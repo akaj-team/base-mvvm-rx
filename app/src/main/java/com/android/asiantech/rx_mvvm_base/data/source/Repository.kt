@@ -4,6 +4,7 @@ import com.android.asiantech.rx_mvvm_base.data.model.Manga
 import com.android.asiantech.rx_mvvm_base.data.model.User
 import com.android.asiantech.rx_mvvm_base.data.source.datasource.DataSource
 import com.android.asiantech.rx_mvvm_base.data.source.remote.RemoteDataSource
+import com.android.asiantech.rx_mvvm_base.data.source.remote.response.FavoriteResponse
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.ResultResponse
 import io.reactivex.Single
 
@@ -21,7 +22,7 @@ class Repository : DataSource {
 
     override fun getProfile(): Single<User> = remoteDataSource.getProfile()
 
-    override fun getMangaList(page: Int): Single<List<Manga>> = remoteDataSource.getMangaList(page)
+    override fun getMangaList(page: Int): Single<FavoriteResponse> = remoteDataSource.getMangaList(page)
 
     override fun star(id: Int): Single<ResultResponse> = remoteDataSource.star(id)
 

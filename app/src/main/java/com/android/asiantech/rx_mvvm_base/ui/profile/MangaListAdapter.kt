@@ -12,8 +12,6 @@ import com.android.asiantech.rx_mvvm_base.data.model.Manga
 import com.android.asiantech.rx_mvvm_base.extension.getScreenWidth
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import kotlinx.android.synthetic.main.activity_profile.*
-import kotlin.coroutines.experimental.coroutineContext
 
 /**
  * @author ChauHQ

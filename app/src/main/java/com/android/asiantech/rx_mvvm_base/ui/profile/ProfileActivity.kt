@@ -1,10 +1,10 @@
 package com.android.asiantech.rx_mvvm_base.ui.profile
 
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.os.UserHandle
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.view.View
 import com.android.asiantech.rx_mvvm_base.R
 import com.android.asiantech.rx_mvvm_base.data.model.Manga
 import com.android.asiantech.rx_mvvm_base.data.model.User
@@ -44,7 +44,7 @@ class ProfileActivity : BaseActivity() {
 
     private fun initListener() {
         imgAvatar.setOnClickListener {
-            //TODO: Hanlde edit avatar
+            //TODO: Handle edit avatar
         }
     }
 
@@ -52,21 +52,41 @@ class ProfileActivity : BaseActivity() {
         adapter = MangaListAdapter(viewModel.getMangaList(), this)
         adapter.onThumbnailClick = this::eventThumbnailMangaClicked
         adapter.onStarClick = this::eventStarClicked
-        recyclerView.layoutManager = GridLayoutManager(this, COlUMN_NUMBERS)
+        val gridLayoutManager = GridLayoutManager(this, COlUMN_NUMBERS)
+        recyclerView.layoutManager = gridLayoutManager
         recyclerView.addItemDecoration(SpacesItemDecoration(resources.getDimensionPixelSize(R.dimen.profile_space_between_mange)))
         recyclerView.adapter = adapter
+
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val visibleItemCount = gridLayoutManager.childCount
+                val totalItemCount = gridLayoutManager.itemCount
+                val firstVisibleItem = gridLayoutManager.findFirstVisibleItemPosition()
+                viewModel.loadMore(visibleItemCount, totalItemCount, firstVisibleItem)
+                        ?.observeOnUiThread()
+                        ?.doFinally { adapter.notifyDataSetChanged() }
+                        ?.subscribe()
+            }
+        })
     }
 
     private fun initObservable() {
         compositeDisposable.add(
                 viewModel.getProfile()
                         .observeOnUiThread()
+                        .doOnSubscribe {
+                            progressBar.visibility = View.VISIBLE
+                        }
+                        .doFinally {
+                            progressBar.visibility = View.GONE
+                        }
                         .subscribe(this::applyDataForProfile, this::showErrorDialog))
 
         compositeDisposable.add(
                 viewModel.getFavoriteMangaList()
                         .observeOnUiThread()
-                        .doFinally {
+                        .doAfterSuccess {
                             adapter.notifyDataSetChanged()
                         }
                         .subscribe({}, this::showErrorDialog))
@@ -94,7 +114,7 @@ class ProfileActivity : BaseActivity() {
     }
 
     private fun eventStarClicked(manga: Manga) {
-        viewModel.updateFavorite(manga).observeOnUiThread().doFinally { }.subscribe()
+        viewModel.updateFavorite(manga).observeOnUiThread().doAfterSuccess { adapter.notifyDataSetChanged() }.subscribe()
     }
 }
 
