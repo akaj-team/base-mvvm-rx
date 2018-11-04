@@ -5,4 +5,4 @@ import com.google.gson.annotations.SerializedName
 /**
  * @author ChauHQ
  */
-data class ResultReponse (@SerializedName("success") val success)
+data class ResultResponse (@SerializedName("success") val success : Boolean)

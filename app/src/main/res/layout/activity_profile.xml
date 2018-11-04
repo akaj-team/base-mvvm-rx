@@ -27,14 +27,16 @@
     </LinearLayout>
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:id="@+id/imgAvatar"
+        android:layout_width="@dimen/profile_avatar_size"
+        android:layout_height="@dimen/profile_avatar_size"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="15dp"
         android:background="@color/colorPrimary"
         android:contentDescription="@string/app_name" />
 
     <TextView
+        android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
