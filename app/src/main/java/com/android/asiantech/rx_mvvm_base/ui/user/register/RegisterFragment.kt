@@ -114,9 +114,9 @@ class RegisterFragment : BaseFragment() {
     }
 
     private fun handleRegisterSuccess(registerResponse: SignUpResponse) {
-        context.showAlert(R.string.success, registerResponse.message, {
+        context.showAlert(R.string.success, registerResponse.message) {
             activity.popFragment()
-        })
+        }
     }
 
     private fun handleRegisterError(throwable: Throwable) {

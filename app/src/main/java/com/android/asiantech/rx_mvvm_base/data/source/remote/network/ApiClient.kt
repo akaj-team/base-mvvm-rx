@@ -44,7 +44,7 @@ open class ApiClient private constructor(url: String? = null) {
             val requestBuilder = original.newBuilder()
                     .method(original.method(), original.body())
             if (token != null) {
-                requestBuilder.addHeader("Authorization", "Bearer $token")
+                requestBuilder.addHeader("access-token", "$token")
             }
             if (!isFromUnitTest) {
                 requestBuilder.addHeader(USER_AGENT, getUserAgent())

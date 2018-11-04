@@ -18,13 +18,13 @@ internal fun Context.showAlert(title: Int, message: String, onOkClick: () -> Uni
     alertBuilder.setCancelable(true)
 
     alertBuilder.setPositiveButton(
-            R.string.ok,
-            { dialog, _ ->
-                run {
-                    dialog.cancel()
-                    onOkClick.invoke()
-                }
-            })
+            R.string.ok
+    ) { dialog, _ ->
+        run {
+            dialog.cancel()
+            onOkClick.invoke()
+        }
+    }
 
     val alert = alertBuilder.create()
     alert.show()
