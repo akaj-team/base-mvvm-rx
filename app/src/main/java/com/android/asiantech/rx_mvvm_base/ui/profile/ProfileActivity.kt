@@ -6,16 +6,14 @@ import android.os.UserHandle
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.GridLayoutManager
 import com.android.asiantech.rx_mvvm_base.R
+import com.android.asiantech.rx_mvvm_base.data.model.Manga
 import com.android.asiantech.rx_mvvm_base.data.model.User
 import com.android.asiantech.rx_mvvm_base.data.source.Repository
 import com.android.asiantech.rx_mvvm_base.extension.observeOnUiThread
 import com.android.asiantech.rx_mvvm_base.ui.base.BaseActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import io.reactivex.Scheduler
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_profile.*
 
 /**
@@ -36,15 +34,24 @@ class ProfileActivity : BaseActivity() {
         viewModel = ProfileViewModel(Repository())
         initRecyclerView()
         initObservable()
+        initListener()
     }
 
-    override fun onPause() {
-        super.onPause()
+    override fun onDestroy() {
+        super.onDestroy()
         compositeDisposable.clear()
+    }
+
+    private fun initListener() {
+        imgAvatar.setOnClickListener {
+            //TODO: Hanlde edit avatar
+        }
     }
 
     private fun initRecyclerView() {
         adapter = MangaListAdapter(viewModel.getMangaList(), this)
+        adapter.onThumbnailClick = this::eventThumbnailMangaClicked
+        adapter.onStarClick = this::eventStarClicked
         recyclerView.layoutManager = GridLayoutManager(this, COlUMN_NUMBERS)
         recyclerView.addItemDecoration(SpacesItemDecoration(resources.getDimensionPixelSize(R.dimen.profile_space_between_mange)))
         recyclerView.adapter = adapter
@@ -59,7 +66,10 @@ class ProfileActivity : BaseActivity() {
         compositeDisposable.add(
                 viewModel.getFavoriteMangaList()
                         .observeOnUiThread()
-                        .subscribe({ adapter.notifyDataSetChanged() }, this::showErrorDialog))
+                        .doFinally {
+                            adapter.notifyDataSetChanged()
+                        }
+                        .subscribe({}, this::showErrorDialog))
     }
 
     private fun applyDataForProfile(user: User) {
@@ -77,6 +87,14 @@ class ProfileActivity : BaseActivity() {
                 .setMessage(throwable.message)
                 .setPositiveButton(android.R.string.ok, null)
                 .show()
+    }
+
+    private fun eventThumbnailMangaClicked(manga: Manga) {
+        // TODO: Move to detail
+    }
+
+    private fun eventStarClicked(manga: Manga) {
+        viewModel.updateFavorite(manga).observeOnUiThread().doFinally { }.subscribe()
     }
 }
 

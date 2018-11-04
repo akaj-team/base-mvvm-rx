@@ -21,6 +21,8 @@ import kotlin.coroutines.experimental.coroutineContext
 class MangaListAdapter(private val mangas: MutableList<Manga>, private val context: Context) : RecyclerView.Adapter<MangaListAdapter.ItemMangaViewHolder>() {
     private var mangaThumbnailHeight = 0
     private var mangaThumbnailWidth = 0
+    internal var onStarClick: (manga: Manga) -> Unit = {}
+    internal var onThumbnailClick: (manga: Manga) -> Unit = {}
 
     init {
         mangaThumbnailHeight = context.resources.getDimensionPixelSize(R.dimen.profile_thumbnai_manga_height)
@@ -41,6 +43,17 @@ class MangaListAdapter(private val mangas: MutableList<Manga>, private val conte
         private val tvName = itemView?.findViewById<TextView>(R.id.tvName)
         private val tvDescription = itemView?.findViewById<TextView>(R.id.tvDescription)
         private val imgAvatar = itemView?.findViewById<ImageView>(R.id.imgAvatar)
+        private val imgStar = itemView?.findViewById<ImageView>(R.id.imgStar)
+
+        init {
+            imgAvatar?.setOnClickListener {
+                onThumbnailClick.invoke(mangas[layoutPosition])
+            }
+
+            imgStar?.setOnClickListener {
+                onStarClick.invoke(mangas[layoutPosition])
+            }
+        }
 
         fun bind(manga: Manga) {
             tvName?.text = manga.name
