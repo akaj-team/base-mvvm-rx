@@ -16,14 +16,14 @@ import kotlinx.android.synthetic.main.fragment_comic_detail.*
 class ComicDetailFragment : BaseFragment() {
     private lateinit var viewModel: ComicDetailVMContract
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.fragment_comic_detail, container, false)
-    }
-
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         // Init viewModel
         viewModel = ComicDetailViewModel(Repository())
+    }
+
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater?.inflate(R.layout.fragment_comic_detail, container, false)
     }
 
     override fun onBindViewModel() {
