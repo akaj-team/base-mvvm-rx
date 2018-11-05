@@ -65,7 +65,7 @@ class ProfileActivity : BaseActivity() {
                 val firstVisibleItem = gridLayoutManager.findFirstVisibleItemPosition()
                 viewModel.loadMore(visibleItemCount, totalItemCount, firstVisibleItem)
                         ?.observeOnUiThread()
-                        ?.doFinally { adapter.notifyDataSetChanged() }
+                        ?.doAfterSuccess { adapter.notifyDataSetChanged() }
                         ?.subscribe()
             }
         })
@@ -86,9 +86,7 @@ class ProfileActivity : BaseActivity() {
         compositeDisposable.add(
                 viewModel.getFavoriteMangaList()
                         .observeOnUiThread()
-                        .doAfterSuccess {
-                            adapter.notifyDataSetChanged()
-                        }
+                        .doAfterSuccess { adapter.notifyDataSetChanged() }
                         .subscribe({}, this::showErrorDialog))
     }
 
