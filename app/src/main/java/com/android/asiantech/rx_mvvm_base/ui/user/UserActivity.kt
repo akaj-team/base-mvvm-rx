@@ -9,7 +9,6 @@ import com.android.asiantech.rx_mvvm_base.extension.observeOnUiThread
 import com.android.asiantech.rx_mvvm_base.extension.replaceFragment
 import com.android.asiantech.rx_mvvm_base.ui.base.BaseActivity
 import com.android.asiantech.rx_mvvm_base.ui.main.MainActivity
-import com.android.asiantech.rx_mvvm_base.ui.profile.ProfileActivity
 import com.android.asiantech.rx_mvvm_base.ui.user.login.LoginFragment
 import com.android.asiantech.rx_mvvm_base.ui.user.register.RegisterFragment
 import com.uniqlo.circle.extension.animSlideInRightSlideOutRight
@@ -29,8 +28,8 @@ class UserActivity : BaseActivity() {
         viewModel.loginStatus()
                 .observeOnUiThread()
                 .subscribe(this::handleCheckLogin)
-        viewModel.checkLogin()
 
+        viewModel.checkLogin()
     }
 
     internal fun openRegisterFragment() {
@@ -47,8 +46,7 @@ class UserActivity : BaseActivity() {
 
     private fun handleCheckLogin(isLoggedIn: Boolean) {
         if (isLoggedIn) {
-            startActivity(Intent(this, ProfileActivity::class.java))
-           // startActivityForResult(Intent(this, MainActivity::class.java), LoginFragment.REQUEST_CODE_MAIN)
+            startActivityForResult(Intent(this, MainActivity::class.java), LoginFragment.REQUEST_CODE_MAIN)
             finish()
         } else {
             openLoginFragment()
