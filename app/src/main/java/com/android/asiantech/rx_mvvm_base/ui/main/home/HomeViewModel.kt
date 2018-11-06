@@ -3,8 +3,11 @@ package com.android.asiantech.rx_mvvm_base.ui.main.home
 import com.android.asiantech.rx_mvvm_base.data.model.Comic
 import com.android.asiantech.rx_mvvm_base.data.source.Repository
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.HomeResponse
+import com.android.asiantech.rx_mvvm_base.extension.observeOnUiThread
+import io.reactivex.Notification
 import io.reactivex.Single
 import io.reactivex.subjects.BehaviorSubject
+import io.reactivex.subjects.PublishSubject
 
 /**
  * @author at-huongnguyen
@@ -19,18 +22,24 @@ class HomeViewModel(private val repository: Repository) : HomeVMContract {
     private var nextPageFlag = false
     private var currentPage = 1
     private val comics = mutableListOf<Comic>()
+    private val comicsObservable: PublishSubject<MutableList<Comic>> = PublishSubject.create()
     private val progressDialogStatus: BehaviorSubject<Boolean> = BehaviorSubject.create()
 
     override fun getComics() = comics
 
-    override fun getComicsFromServer(): Single<HomeResponse> {
-        return repository.getComics(currentPage)
+    override fun getComicsFromServer() {
+        repository.getComics(currentPage)
+                .observeOnUiThread()
                 .doOnSubscribe {
-                    progressDialogStatus.onNext(true)
+                    progressDialogStatus.onNext(currentPage == 1)
                     isLoading = true
                 }
-                .doOnSuccess {
+                .doFinally {
+                    progressDialogStatus.onNext(false)
+                }
+                .subscribe({
                     isLoading = false
+                    nextPageFlag = it.nextPageFlag
                     if (currentPage == 1) {
                         comics.clear()
                     }
@@ -40,11 +49,13 @@ class HomeViewModel(private val repository: Repository) : HomeVMContract {
                     if (it.comics.isNotEmpty()) {
                         comics.addAll(it.comics)
                     }
-                }
-                .doFinally {
-                    progressDialogStatus.onNext(false)
-                }
+                    comicsObservable.onNext(comics)
+                }, {
+                    comicsObservable.onError(it)
+                })
     }
+
+    override fun getComicsObservable() = comicsObservable
 
     override fun updateProgressDialogStatus() = progressDialogStatus
 
@@ -52,7 +63,7 @@ class HomeViewModel(private val repository: Repository) : HomeVMContract {
 
     override fun unFavorite(position: Int) = repository.unFavorite(comics[position].id)
 
-    override fun isFavorite(position: Int) = comics[position].viewCount > 0
+    override fun isFavorite(position: Int) = comics[position].likeFlag
 
     override fun loadMore(visibleItemCount: Int, totalItemCount: Int, firstVisibleItem: Int) {
         if (canLoadMore(visibleItemCount, totalItemCount, firstVisibleItem)) {

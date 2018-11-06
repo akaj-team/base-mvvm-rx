@@ -46,11 +46,12 @@ class HomeFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
         initProgressDialog()
+        viewModel.getComicsFromServer()
     }
 
     override fun onBindViewModel() {
         addDisposables(viewModel.updateProgressDialogStatus().subscribe(this::handleDisplayDialog),
-                viewModel.getComicsFromServer()
+                viewModel.getComicsObservable()
                         .observeOnUiThread()
                         .subscribe({ adapter.notifyDataSetChanged() }, this::handleLoadComicsError))
     }
@@ -64,7 +65,7 @@ class HomeFragment : BaseFragment() {
         recyclerViewHome.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                if (dy > 5) {
+                if (dy > 0) {
                     val visibleItemCount = gridLayoutManager.childCount
                     val totalItemCount = gridLayoutManager.itemCount
                     val firstVisibleItem = gridLayoutManager.findFirstVisibleItemPosition()
