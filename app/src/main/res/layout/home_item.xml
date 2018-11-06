@@ -2,14 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <ImageView
         android:id="@+id/imgHome"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:contentDescription="@null" />
+        android:contentDescription="@null"
+        android:scaleType="centerCrop" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,6 +29,8 @@
                 android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:textStyle="bold"
                 tools:text="Title" />
 
@@ -38,15 +41,18 @@
                 android:layout_marginTop="5dp"
                 android:drawableStart="@drawable/ic_description_black_24dp"
                 android:drawablePadding="5dp"
+                android:ellipsize="end"
                 android:gravity="center_vertical"
+                android:maxLines="2"
                 tools:text="Description" />
 
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/imgFavorite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@null"
-            android:src="@drawable/ic_star_border_black_24dp" />
+            android:src="@drawable/selector_ic_favorite" />
     </LinearLayout>
 </LinearLayout>

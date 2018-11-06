@@ -11,5 +11,6 @@ data class Comic(@SerializedName("id") val id: Int,
                  @SerializedName("description") val description: String,
                  @SerializedName("author") val author: String,
                  @SerializedName("view_count") val viewCount: Int,
+                 @SerializedName("like_flag") var likeFlag: Boolean,
                  @SerializedName("like_count") val likeCount: Int,
                  @SerializedName("image") val image: String)

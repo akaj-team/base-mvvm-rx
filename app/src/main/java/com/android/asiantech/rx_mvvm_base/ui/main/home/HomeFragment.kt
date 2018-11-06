@@ -21,6 +21,11 @@ import kotlinx.android.synthetic.main.fragment_home.*
  */
 class HomeFragment : BaseFragment() {
 
+    companion object {
+        private const val GIRD_COLUMN = 2
+    }
+
+
     private lateinit var viewModel: HomeVMContract
     private lateinit var adapter: HomeAdapter
     private lateinit var progressDialog: ProgressDialog
@@ -51,7 +56,8 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun initRecyclerView() {
-        val gridLayoutManager = GridLayoutManager(activity, 2)
+        recyclerViewHome.addItemDecoration(ItemDecorationHome(resources.getDimensionPixelSize(R.dimen.sizeGridSpacing), GIRD_COLUMN))
+        val gridLayoutManager = GridLayoutManager(activity, GIRD_COLUMN)
         recyclerViewHome.layoutManager = gridLayoutManager
         recyclerViewHome.adapter = adapter
 
@@ -109,17 +115,19 @@ class HomeFragment : BaseFragment() {
 
     private fun handleFavoriteSuccess(success: Boolean, position: Int) {
         if (success) {
-            //Todo: Handle later
+            viewModel.getComics()[position].likeFlag = true
+            adapter.notifyItemChanged(position)
         }
     }
 
     private fun handleUnFavoriteSuccess(success: Boolean, position: Int) {
         if (success) {
-            //Todo: Handle later
+            viewModel.getComics()[position].likeFlag = false
+            adapter.notifyItemChanged(position)
         }
     }
 
     private fun handleFavoriteError(error: Throwable) {
-        Toast.makeText(activity, error.message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity, (error as? ApiException)?.errorMessage, Toast.LENGTH_SHORT).show()
     }
 }
