@@ -46,11 +46,11 @@ class HomeAdapter(private val comics: MutableList<Comic>) : RecyclerView.Adapter
 
         private var tvTitle: TextView = itemView.findViewById(R.id.tvTitle)
         private var tvDescription: TextView = itemView.findViewById(R.id.tvDescription)
-        private var imgHome: ImageView = itemView.findViewById(R.id.imgHome)
+        private var imgThumb: ImageView = itemView.findViewById(R.id.imgThumb)
         private var imgFavorite: ImageView = itemView.findViewById(R.id.imgFavorite)
 
         init {
-            imgHome.setOnTouchListener { _, event ->
+            imgThumb.setOnTouchListener { _, event ->
                 gestureDetector.onTouchEvent(event)
                 true
             }
@@ -59,8 +59,8 @@ class HomeAdapter(private val comics: MutableList<Comic>) : RecyclerView.Adapter
         internal fun onBind() {
             val comic = comics[adapterPosition]
             Glide.with(itemView.context)
-                    .load("http://st.thichtruyentranh.com//images//icon//0004//conan1416865530.jpg")
-                    .into(imgHome)
+                    .load(comic.image)
+                    .into(imgThumb)
             tvTitle.text = comic.name
             tvDescription.text = comic.description
             imgFavorite.isSelected = comic.likeFlag
