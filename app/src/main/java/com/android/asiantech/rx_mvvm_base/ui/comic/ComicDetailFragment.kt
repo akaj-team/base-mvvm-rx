@@ -38,9 +38,11 @@ class ComicDetailFragment : BaseFragment() {
     }
 
     private fun updateUI(comic: Comic) {
-        tvComicName.text = comic.name
-        tvAuthor.text = comic.author
-        tvComicIntroduction.text = comic.introduction
+        with(comic) {
+            tvComicName.text = name
+            tvAuthor.text = author
+            tvComicIntroduction.text = introduction
+        }
     }
 
     private fun onProgressBarStatus(isShow: Boolean) {

@@ -58,5 +58,4 @@
             android:layout_height="wrap_content"
             tools:text="Introduction" />
     </ScrollView>
-
 </android.support.constraint.ConstraintLayout>
