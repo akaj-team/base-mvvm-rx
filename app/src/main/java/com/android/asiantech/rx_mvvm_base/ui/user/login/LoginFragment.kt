@@ -120,6 +120,7 @@ class LoginFragment : BaseFragment() {
         btnLogin.isEnabled = status
     }
 
+    @SuppressWarnings("checkResult")
     private fun login(email: String, password: String) {
         viewModel.login(email, password)
                 .observeOnUiThread()
