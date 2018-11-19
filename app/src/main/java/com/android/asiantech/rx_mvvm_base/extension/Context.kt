@@ -11,10 +11,10 @@ import android.util.DisplayMetrics
  *
  * @author at-vinhhuynh
  */
-internal fun Context.showAlert(title: Int, message: String, onOkClick: () -> Unit = {}) {
+internal fun Context.showAlert(title: Int? = null, message: String?, onOkClick: () -> Unit = {}) {
     val alertBuilder = AlertDialog.Builder(this)
-    alertBuilder.setTitle(title)
-    alertBuilder.setMessage(message)
+    title?.let { alertBuilder.setTitle(it) }
+    message?.let { alertBuilder.setMessage(it) }
     alertBuilder.setCancelable(true)
 
     alertBuilder.setPositiveButton(
@@ -30,5 +30,5 @@ internal fun Context.showAlert(title: Int, message: String, onOkClick: () -> Uni
     alert.show()
 }
 
-internal fun Context.getScreenWidth(): Int = DisplayMetrics().also { (this as? AppCompatActivity)?.windowManager?.defaultDisplay?.getMetrics(it) }.widthPixels
-
+internal fun Context.getScreenWidth() =
+        DisplayMetrics().also { (this as? AppCompatActivity)?.windowManager?.defaultDisplay?.getMetrics(it) }.widthPixels

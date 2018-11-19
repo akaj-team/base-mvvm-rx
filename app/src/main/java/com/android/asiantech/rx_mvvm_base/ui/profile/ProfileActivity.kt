@@ -1,7 +1,6 @@
 package com.android.asiantech.rx_mvvm_base.ui.profile
 
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -10,6 +9,7 @@ import com.android.asiantech.rx_mvvm_base.data.model.Manga
 import com.android.asiantech.rx_mvvm_base.data.model.User
 import com.android.asiantech.rx_mvvm_base.data.source.Repository
 import com.android.asiantech.rx_mvvm_base.extension.observeOnUiThread
+import com.android.asiantech.rx_mvvm_base.extension.showAlert
 import com.android.asiantech.rx_mvvm_base.ui.base.BaseActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.activity_profile.*
  * @author ChauHQ
  */
 class ProfileActivity : BaseActivity() {
-    private lateinit var viewModel: ProfileContract
+    private lateinit var viewModel: ProfileVMContract
     private lateinit var adapter: MangaListAdapter
     private var compositeDisposable = CompositeDisposable()
 
@@ -72,25 +72,25 @@ class ProfileActivity : BaseActivity() {
     }
 
     private fun initObservable() {
+
+        compositeDisposable.add(
+                viewModel.updateStateProgressBarObservable()
+                        .observeOnUiThread()
+                        .subscribe(this::handleStateProgressBar))
+
         compositeDisposable.add(
                 viewModel.getProfile()
                         .observeOnUiThread()
-                        .doOnSubscribe {
-                            progressBar.visibility = View.VISIBLE
-                        }
-                        .doFinally {
-                            progressBar.visibility = View.GONE
-                        }
-                        .subscribe(this::applyDataForProfile, this::showErrorDialog))
+                        .subscribe(this::handleGetUserProfileSuccess, this::handleGetUserProfileError))
 
         compositeDisposable.add(
                 viewModel.getFavoriteMangaList()
                         .observeOnUiThread()
-                        .doAfterSuccess { adapter.notifyDataSetChanged() }
-                        .subscribe({}, this::showErrorDialog))
+                        .doAfterSuccess { }
+                        .subscribe({ handleGetFavoriteMangasSuccess() }, this::handleGetUserProfileError))
     }
 
-    private fun applyDataForProfile(user: User) {
+    private fun handleGetUserProfileSuccess(user: User) {
         val avatarSize = resources.getDimensionPixelSize(R.dimen.profile_avatar_size)
         tvName.text = user.userName
         Glide.with(this).load(user.avatar)
@@ -100,19 +100,30 @@ class ProfileActivity : BaseActivity() {
                 }).into(imgAvatar)
     }
 
-    private fun showErrorDialog(throwable: Throwable) {
-        AlertDialog.Builder(this)
-                .setMessage(throwable.message)
-                .setPositiveButton(android.R.string.ok, null)
-                .show()
+    private fun handleGetUserProfileError(throwable: Throwable) {
+        showAlert(message = throwable.message)
     }
 
     private fun eventThumbnailMangaClicked(manga: Manga) {
         // TODO: Move to detail
     }
 
-    private fun eventStarClicked(manga: Manga) {
-        viewModel.updateFavorite(manga).observeOnUiThread().doAfterSuccess { adapter.notifyDataSetChanged() }.subscribe()
+    private fun eventStarClicked(position: Int) {
+        viewModel.updateFavorite(position)
+                .observeOnUiThread()
+                .doAfterSuccess { handleStarClickSuccess(position) }
+                .subscribe()
+    }
+
+    private fun handleStateProgressBar(state: Int) {
+        progressBar.visibility = state
+    }
+
+    private fun handleGetFavoriteMangasSuccess() {
+        adapter.notifyDataSetChanged()
+    }
+
+    private fun handleStarClickSuccess(position: Int) {
+        adapter.notifyItemChanged(position)
     }
 }
-

@@ -19,7 +19,7 @@ import com.bumptech.glide.request.RequestOptions
 class MangaListAdapter(private val mangas: MutableList<Manga>, private val context: Context) : RecyclerView.Adapter<MangaListAdapter.ItemMangaViewHolder>() {
     private var mangaThumbnailHeight = 0
     private var mangaThumbnailWidth = 0
-    internal var onStarClick: (manga: Manga) -> Unit = {}
+    internal var onStarClick: (position: Int) -> Unit = {}
     internal var onThumbnailClick: (manga: Manga) -> Unit = {}
 
     init {
@@ -49,7 +49,7 @@ class MangaListAdapter(private val mangas: MutableList<Manga>, private val conte
             }
 
             imgStar?.setOnClickListener {
-                onStarClick.invoke(mangas[layoutPosition])
+                onStarClick.invoke(layoutPosition)
             }
         }
 
@@ -57,7 +57,8 @@ class MangaListAdapter(private val mangas: MutableList<Manga>, private val conte
             tvName?.text = manga.name
             tvDescription?.text = manga.description
             imgAvatar?.let {
-                Glide.with(context).load(manga.thumbnail)
+                Glide.with(context)
+                        .load(manga.thumbnail)
                         .apply(RequestOptions().apply {
                             override(mangaThumbnailWidth, mangaThumbnailHeight)
                             centerCrop()

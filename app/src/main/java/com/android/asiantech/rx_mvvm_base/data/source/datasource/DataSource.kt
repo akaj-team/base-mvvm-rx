@@ -18,11 +18,9 @@ interface DataSource {
 
     fun register(email: String, password: String, avatar: String): Single<SignUpResponse>
 
-    // Profile data source
-
     fun getProfile(): Single<User>
 
-    fun getMangaList(page: Int): Single<FavoriteResponse>
+    fun getFavoriteMangaList(page: Int): Single<FavoriteResponse>
 
     fun star(id: Int): Single<ResultResponse>
 

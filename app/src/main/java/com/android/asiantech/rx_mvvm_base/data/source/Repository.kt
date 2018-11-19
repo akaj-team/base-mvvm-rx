@@ -22,7 +22,7 @@ class Repository : DataSource {
 
     override fun getProfile(): Single<User> = remoteDataSource.getProfile()
 
-    override fun getMangaList(page: Int): Single<FavoriteResponse> = remoteDataSource.getMangaList(page)
+    override fun getFavoriteMangaList(page: Int): Single<FavoriteResponse> = remoteDataSource.getFavoriteMangaList(page)
 
     override fun star(id: Int): Single<ResultResponse> = remoteDataSource.star(id)
 

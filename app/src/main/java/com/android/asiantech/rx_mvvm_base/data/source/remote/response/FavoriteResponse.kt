@@ -6,4 +6,5 @@ import com.google.gson.annotations.SerializedName
 /**
  * @author ChauHQ
  */
-data class FavoriteResponse(@SerializedName("next_page_flag") val nextPageFlag: Boolean, @SerializedName("") val mangaList: List<Manga>)
+data class FavoriteResponse(@SerializedName("next_page_flag") val nextPageFlag: Boolean,
+                            @SerializedName("") val mangaList: List<Manga>)

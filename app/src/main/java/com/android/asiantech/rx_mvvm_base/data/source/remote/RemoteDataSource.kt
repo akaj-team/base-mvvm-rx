@@ -23,7 +23,7 @@ class RemoteDataSource(private val api: ApiService) : DataSource {
 
     override fun getProfile(): Single<User> = api.getProfile()
 
-    override fun getMangaList(page: Int): Single<FavoriteResponse> = api.getFavorite(page)
+    override fun getFavoriteMangaList(page: Int): Single<FavoriteResponse> = api.getFavorite(page)
 
     override fun star(id: Int): Single<ResultResponse> = api.star(id)
 

@@ -5,11 +5,12 @@ import com.android.asiantech.rx_mvvm_base.data.model.User
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.FavoriteResponse
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.ResultResponse
 import io.reactivex.Single
+import io.reactivex.subjects.BehaviorSubject
 
 /**
  * @author ChauHQ
  */
-interface ProfileContract {
+interface ProfileVMContract {
 
     fun getProfile(): Single<User>
 
@@ -17,7 +18,9 @@ interface ProfileContract {
 
     fun getFavoriteMangaList(): Single<FavoriteResponse>
 
-    fun updateFavorite(manga: Manga): Single<ResultResponse>
+    fun updateFavorite(position: Int): Single<ResultResponse>
 
-    fun loadMore(visibleItemCount: Int, totalItemCount: Int, firstVisibleItem: Int) : Single<FavoriteResponse>?
+    fun loadMore(visibleItemCount: Int, totalItemCount: Int, firstVisibleItem: Int): Single<FavoriteResponse>?
+
+    fun updateStateProgressBarObservable(): BehaviorSubject<Int>
 }

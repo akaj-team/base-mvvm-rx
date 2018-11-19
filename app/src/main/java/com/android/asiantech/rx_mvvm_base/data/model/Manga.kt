@@ -1,6 +1,12 @@
 package com.android.asiantech.rx_mvvm_base.data.model
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * @author ChauHQ
  */
-data class Manga(val id : Int, val name: String, val description: String, val thumbnail: String, var likeFlag: Boolean)
+data class Manga(@SerializedName("id") val id: Int,
+                 @SerializedName("name") val name: String,
+                 @SerializedName("description") val description: String,
+                 @SerializedName("image") val thumbnail: String,
+                 @SerializedName("like_flag") var likeFlag: Boolean)

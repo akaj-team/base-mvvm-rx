@@ -6,4 +6,7 @@ import com.google.gson.annotations.SerializedName
  *
  * @author at-vinhhuynh
  */
-data class User(val avatar: String, @SerializedName("user-name") val userName: String, @SerializedName("nick-name") val nickName: String, @SerializedName("rate-count") val rateCount: Int)
+data class User(@SerializedName("avatar") val avatar: String,
+                @SerializedName("user-name") val userName: String,
+                @SerializedName("nick-name") val nickName: String,
+                @SerializedName("rate-count") val rateCount: Int)
