@@ -1,11 +1,9 @@
 package com.android.asiantech.rx_mvvm_base.ui.main.home
 
+import android.annotation.SuppressLint
 import com.android.asiantech.rx_mvvm_base.data.model.Comic
 import com.android.asiantech.rx_mvvm_base.data.source.Repository
-import com.android.asiantech.rx_mvvm_base.data.source.remote.response.HomeResponse
 import com.android.asiantech.rx_mvvm_base.extension.observeOnUiThread
-import io.reactivex.Notification
-import io.reactivex.Single
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 
@@ -27,6 +25,7 @@ class HomeViewModel(private val repository: Repository) : HomeVMContract {
 
     override fun getComics() = comics
 
+    @SuppressLint("CheckResult")
     override fun getComicsFromServer() {
         repository.getComics(currentPage)
                 .observeOnUiThread()

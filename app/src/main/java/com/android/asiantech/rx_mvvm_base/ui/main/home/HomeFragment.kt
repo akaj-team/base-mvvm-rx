@@ -24,8 +24,7 @@ class HomeFragment : BaseFragment() {
     companion object {
         private const val GIRD_COLUMN = 2
     }
-
-
+    
     private lateinit var viewModel: HomeVMContract
     private lateinit var adapter: HomeAdapter
     private lateinit var progressDialog: ProgressDialog
@@ -50,14 +49,16 @@ class HomeFragment : BaseFragment() {
     }
 
     override fun onBindViewModel() {
-        addDisposables(viewModel.updateProgressDialogStatus().subscribe(this::handleDisplayDialog),
+        addDisposables(viewModel.updateProgressDialogStatus()
+                .observeOnUiThread()
+                .subscribe(this::handleDisplayDialog),
                 viewModel.getComicsObservable()
                         .observeOnUiThread()
                         .subscribe({ adapter.notifyDataSetChanged() }, this::handleLoadComicsError))
     }
 
     private fun initRecyclerView() {
-        recyclerViewHome.addItemDecoration(ItemDecorationHome(resources.getDimensionPixelSize(R.dimen.sizeGridSpacing), GIRD_COLUMN))
+        recyclerViewHome.addItemDecoration(ItemDecorationHome(resources.getDimensionPixelSize(R.dimen.home_fragment_recyclerview_grid_spacing), GIRD_COLUMN))
         val gridLayoutManager = GridLayoutManager(activity, GIRD_COLUMN)
         recyclerViewHome.layoutManager = gridLayoutManager
         recyclerViewHome.adapter = adapter
@@ -84,6 +85,7 @@ class HomeFragment : BaseFragment() {
         //Todo: Open Detail Screen
     }
 
+    @SuppressWarnings("checkResult")
     private fun handleItemDoubleClicked(position: Int) {
         if (viewModel.isFavorite(position)) {
             viewModel.unFavorite(position)
@@ -101,12 +103,10 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun handleDisplayDialog(status: Boolean) {
-        activity.runOnUiThread {
-            if (status) {
-                progressDialog.show()
-            } else {
-                progressDialog.dismiss()
-            }
+        if (status) {
+            progressDialog.show()
+        } else {
+            progressDialog.dismiss()
         }
     }
 

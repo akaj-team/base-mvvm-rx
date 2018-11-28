@@ -58,12 +58,14 @@ class HomeAdapter(private val comics: MutableList<Comic>) : RecyclerView.Adapter
 
         internal fun onBind() {
             val comic = comics[adapterPosition]
-            Glide.with(itemView.context)
-                    .load(comic.image)
-                    .into(imgThumb)
-            tvTitle.text = comic.name
-            tvDescription.text = comic.description
-            imgFavorite.isSelected = comic.likeFlag
+            with(comic) {
+                Glide.with(itemView.context)
+                        .load(image)
+                        .into(imgThumb)
+                tvTitle.text = name
+                tvDescription.text = description
+                imgFavorite.isSelected = likeFlag
+            }
         }
     }
 }
