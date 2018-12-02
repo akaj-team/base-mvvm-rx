@@ -1,7 +1,7 @@
 package com.android.asiantech.rx_mvvm_base
 
 import com.android.asiantech.rx_mvvm_base.data.source.remote.network.ApiClient
-import com.android.asiantech.rx_mvvm_base.datasource.RemoteDataSourceTest
+import com.android.asiantech.rx_mvvm_base.datasource.ComicRemoteDataSourceTest
 import okhttp3.HttpUrl
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.AfterClass
@@ -15,7 +15,7 @@ import org.junit.runners.Suite
  */
 @RunWith(Suite::class)
 @Suite.SuiteClasses(
-        RemoteDataSourceTest::class
+        ComicRemoteDataSourceTest::class
 )
 class ApiSuiteTest {
 

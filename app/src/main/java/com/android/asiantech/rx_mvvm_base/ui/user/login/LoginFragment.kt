@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.android.asiantech.rx_mvvm_base.R
 import com.android.asiantech.rx_mvvm_base.data.source.LocalRepository
-import com.android.asiantech.rx_mvvm_base.data.source.Repository
+import com.android.asiantech.rx_mvvm_base.data.source.ComicRepository
 import com.android.asiantech.rx_mvvm_base.data.source.remote.network.ApiClient
 import com.android.asiantech.rx_mvvm_base.data.source.remote.network.ApiException
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.LoginResponse
@@ -42,7 +42,7 @@ class LoginFragment : BaseFragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = LoginViewModel(Repository(), LocalRepository(context))
+        viewModel = LoginViewModel(ComicRepository(), LocalRepository(context))
         initView()
         initListener()
     }

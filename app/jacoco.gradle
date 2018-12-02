@@ -7,12 +7,7 @@ task jacocoTestReport(type: JacocoReport, dependsOn: 'testDebugUnitTest') {
         html.enabled = true
     }
 
-    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*',
-                      '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*',
-                      '**/*UI.**', '**/*Exception.**', '**/*Response.**',
-                      //Option, will remove this below
-                      '**/*Repository.**']
-    def include = ['**/*ViewModel.*', '**/*DataSource.**']
+    def include = ['**/*ViewModel.*', '**/*ComicDataSource.**']
     def exclude = ['**/*Dummy*.*']
     def mainSrc = "${project.projectDir}/src/main/java"
 

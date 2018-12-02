@@ -2,7 +2,7 @@ package com.android.asiantech.rx_mvvm_base.viewmodel
 
 import com.android.asiantech.rx_mvvm_base.BaseTest
 import com.android.asiantech.rx_mvvm_base.data.source.LocalRepository
-import com.android.asiantech.rx_mvvm_base.data.source.Repository
+import com.android.asiantech.rx_mvvm_base.data.source.ComicRepository
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.LoginResponse
 import com.android.asiantech.rx_mvvm_base.ui.user.login.LoginViewModel
 import com.android.asiantech.rx_mvvm_base.util.RxSchedulersOverrideRule
@@ -28,7 +28,7 @@ class LoginViewModelTest : BaseTest() {
     val rule = RxSchedulersOverrideRule()
 
     @Mock
-    private lateinit var repository: Repository
+    private lateinit var comicRepository: ComicRepository
 
     @Mock
     private lateinit var localRepository: LocalRepository
@@ -38,7 +38,7 @@ class LoginViewModelTest : BaseTest() {
     @Before
     fun beforeTest() {
         MockitoAnnotations.initMocks(this)
-        viewModel = LoginViewModel(repository, localRepository)
+        viewModel = LoginViewModel(comicRepository, localRepository)
     }
 
     @Test
@@ -57,7 +57,7 @@ class LoginViewModelTest : BaseTest() {
         /* Given */
         val loginTest = TestObserver<LoginResponse>()
         val processDialogStatusTest = TestObserver<Boolean>()
-        `when`(repository.login(anyString(), anyString())).thenReturn(Single.just(LoginResponse("token")))
+        `when`(comicRepository.login(anyString(), anyString())).thenReturn(Single.just(LoginResponse("token")))
 
         /* When */
         viewModel.progressDialogStatus().subscribe(processDialogStatusTest)

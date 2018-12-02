@@ -1,7 +1,7 @@
 package com.android.asiantech.rx_mvvm_base.viewmodel
 
 import com.android.asiantech.rx_mvvm_base.BaseTest
-import com.android.asiantech.rx_mvvm_base.data.source.Repository
+import com.android.asiantech.rx_mvvm_base.data.source.ComicRepository
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.SignUpResponse
 import com.android.asiantech.rx_mvvm_base.ui.user.register.RegisterViewModel
 import com.android.asiantech.rx_mvvm_base.util.RxSchedulersOverrideRule
@@ -27,14 +27,14 @@ class RegisterViewModelTest : BaseTest() {
     val rule = RxSchedulersOverrideRule()
 
     @Mock
-    private lateinit var repository: Repository
+    private lateinit var comicRepository: ComicRepository
 
     private lateinit var viewModel: RegisterViewModel
 
     @Before
     fun beforeTest() {
         MockitoAnnotations.initMocks(this)
-        viewModel = RegisterViewModel(repository)
+        viewModel = RegisterViewModel(comicRepository)
     }
 
     @Test
@@ -53,7 +53,7 @@ class RegisterViewModelTest : BaseTest() {
         /* Given */
         val progressDiaLogStatusTest = TestObserver<Boolean>()
         val registerTest = TestObserver<SignUpResponse>()
-        `when`(repository.register(anyString(), anyString(), anyString())).thenReturn(Single.just(SignUpResponse("Register completed")))
+        `when`(comicRepository.register(anyString(), anyString(), anyString())).thenReturn(Single.just(SignUpResponse("Register completed")))
 
         /* When */
         viewModel.progressDialogStatus().subscribe(progressDiaLogStatusTest)

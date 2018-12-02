@@ -1,7 +1,7 @@
 package com.android.asiantech.rx_mvvm_base.datasource
 
 import com.android.asiantech.rx_mvvm_base.BaseTest
-import com.android.asiantech.rx_mvvm_base.data.source.local.LocalDataSource
+import com.android.asiantech.rx_mvvm_base.data.source.local.ComicLocalDataSource
 import org.hamcrest.core.Is.`is`
 import org.junit.Assert
 import org.junit.Before
@@ -18,34 +18,34 @@ import org.robolectric.annotation.Config
 @RunWith(RobolectricTestRunner::class)
 @Config(manifest = Config.NONE)
 class LocalDataSourceTest : BaseTest() {
-    private lateinit var localDataSource: LocalDataSource
+    private lateinit var ComicLocalDataSource: ComicLocalDataSource
 
     @Before
     fun beforeTest() {
-        localDataSource = LocalDataSource(RuntimeEnvironment.application.applicationContext)
+        ComicLocalDataSource = ComicLocalDataSource(RuntimeEnvironment.application.applicationContext)
     }
 
     @Test
     fun `Given apiToken - When call getApiToken() - Then apiToken is correct`() {
         /* Given */
-        localDataSource.saveApiToken("token")
+        ComicLocalDataSource.saveApiToken("token")
 
         /* When */
 
         /* Then */
-        Assert.assertThat(localDataSource.getApiToken(), `is`("token"))
+        Assert.assertThat(ComicLocalDataSource.getApiToken(), `is`("token"))
     }
 
 
     @Test
     fun `Given apiToke - When call clearApiToken() - Then apiToken is empty `() {
         /* Given */
-        localDataSource.saveApiToken("token")
+        ComicLocalDataSource.saveApiToken("token")
 
         /* When */
-        localDataSource.clearApiToken()
+        ComicLocalDataSource.clearApiToken()
 
         /* Then */
-        Assert.assertThat(localDataSource.getApiToken(), `is`(""))
+        Assert.assertThat(ComicLocalDataSource.getApiToken(), `is`(""))
     }
 }

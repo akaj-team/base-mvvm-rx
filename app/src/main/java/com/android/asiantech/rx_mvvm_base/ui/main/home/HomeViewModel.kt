@@ -2,7 +2,7 @@ package com.android.asiantech.rx_mvvm_base.ui.main.home
 
 import android.annotation.SuppressLint
 import com.android.asiantech.rx_mvvm_base.data.model.Comic
-import com.android.asiantech.rx_mvvm_base.data.source.Repository
+import com.android.asiantech.rx_mvvm_base.data.source.ComicRepository
 import com.android.asiantech.rx_mvvm_base.extension.observeOnUiThread
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
@@ -10,7 +10,7 @@ import io.reactivex.subjects.PublishSubject
 /**
  * @author at-huongnguyen
  */
-class HomeViewModel(private val repository: Repository) : HomeVMContract {
+class HomeViewModel(private val comicRepository: ComicRepository) : HomeVMContract {
 
     companion object {
         private const val VISIBLE_THRESHOLD = 5
@@ -27,7 +27,7 @@ class HomeViewModel(private val repository: Repository) : HomeVMContract {
 
     @SuppressLint("CheckResult")
     override fun getComicsFromServer() {
-        repository.getComics(currentPage)
+        comicRepository.getComics(currentPage)
                 .observeOnUiThread()
                 .doOnSubscribe {
                     progressDialogStatus.onNext(currentPage == 1)
@@ -58,9 +58,9 @@ class HomeViewModel(private val repository: Repository) : HomeVMContract {
 
     override fun updateProgressDialogStatus() = progressDialogStatus
 
-    override fun favorite(position: Int) = repository.favorite(comics[position].id)
+    override fun favorite(position: Int) = comicRepository.favorite(comics[position].id)
 
-    override fun unFavorite(position: Int) = repository.unFavorite(comics[position].id)
+    override fun unFavorite(position: Int) = comicRepository.unFavorite(comics[position].id)
 
     override fun isFavorite(position: Int) = comics[position].likeFlag
 
