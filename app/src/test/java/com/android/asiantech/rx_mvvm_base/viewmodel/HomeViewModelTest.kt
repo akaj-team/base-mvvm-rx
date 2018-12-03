@@ -72,7 +72,6 @@ class HomeViewModelTest : BaseTest() {
         }
     }
 
-
     @Test
     fun `Given comic list and a position in list - When call favorite() - Then return right FavoriteResponse`() {
         /* Given */
@@ -107,7 +106,6 @@ class HomeViewModelTest : BaseTest() {
         }
     }
 
-
     @Test
     fun `Given comic list and a postion in list - When call isFavorite() - Then the result should be correct`() {
         /* Given */
@@ -119,7 +117,6 @@ class HomeViewModelTest : BaseTest() {
         /* Then */
         Assert.assertThat(viewModel.isFavorite(0), `is`(true))
     }
-
 
     @Test
     fun `Given isLoading is false, nextPageFlag is true and total of visibleItemCount, firstVisibleItem and VISIBLE_THRESHOLD more than or similar totalItemCount - When call loadMore() - Then call getComicFromServer()`() {

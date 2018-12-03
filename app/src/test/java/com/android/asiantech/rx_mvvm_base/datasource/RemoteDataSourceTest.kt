@@ -92,7 +92,6 @@ class RemoteDataSourceTest {
         }
     }
 
-
     @Test
     fun `Given comic id - When call favorite() - Then response is correct`() {
         /* Given */
@@ -125,5 +124,16 @@ class RemoteDataSourceTest {
             Assert.assertThat(it.success, `is`(true))
             true
         }
+    }
+
+    @Test
+    fun `Given nothing - When call getUser() - Then response is correct`() {
+        /* Given */
+
+        /* When */
+        RemoteDataSource(ApiSuiteTest.apiClient.service).getUser()
+
+        /* Then */
+        Assert.assertTrue(true)
     }
 }

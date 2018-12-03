@@ -51,7 +51,6 @@ class LoginViewModelTest : BaseTest() {
         Assert.assertThat(viewModel, CoreMatchers.notNullValue())
     }
 
-
     @Test
     fun `Given email and password - When call login() - Then LoginResponse and processDialog status is correct`() {
         /* Given */
@@ -80,7 +79,6 @@ class LoginViewModelTest : BaseTest() {
             true
         }
     }
-
 
     @Test
     fun `Given all condition is incorrect - When call validateLoginInformation() - Then validateRegisterInformationStatus is false`() {

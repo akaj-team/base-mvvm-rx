@@ -47,7 +47,6 @@ class RegisterViewModelTest : BaseTest() {
         Assert.assertThat(viewModel, CoreMatchers.notNullValue())
     }
 
-
     @Test
     fun `Given email, password and avatar - When call register() - Then SignUp message and progress dialog status is correct`() {
         /* Given */

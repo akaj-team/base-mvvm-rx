@@ -8,6 +8,7 @@ interface LocalDataSource {
 
     /**
      * Save api token to shareReference
+     * @param apiToken is token get from server after login
      */
     fun saveApiToken(apiToken: String)
 
@@ -18,6 +19,7 @@ interface LocalDataSource {
 
     /**
      * Get api token from shareReference
+     * @return api token
      */
     fun getApiToken(): String
 }
