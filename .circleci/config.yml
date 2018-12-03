@@ -39,7 +39,6 @@ jobs:
       - store_artifacts:
           path: app/build/reports/
 
-
 workflows:
   version: 2
   build_and_deploy:
