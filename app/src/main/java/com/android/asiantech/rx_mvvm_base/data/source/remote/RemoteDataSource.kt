@@ -5,6 +5,7 @@ import com.android.asiantech.rx_mvvm_base.data.source.datasource.DataSource
 import com.android.asiantech.rx_mvvm_base.data.source.remote.network.ApiClient
 import com.android.asiantech.rx_mvvm_base.data.source.remote.network.ApiService
 import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
 
 /**
  *
@@ -25,6 +26,6 @@ class RemoteDataSource(private val api: ApiService) : DataSource {
     override fun unFavorite(id: Int) = api.unFavorite(id)
 
     override fun getUser(): Observable<User> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return PublishSubject.create<User>()
     }
 }
