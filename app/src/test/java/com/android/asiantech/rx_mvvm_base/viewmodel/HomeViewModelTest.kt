@@ -2,7 +2,7 @@ package com.android.asiantech.rx_mvvm_base.viewmodel
 
 import com.android.asiantech.rx_mvvm_base.BaseTest
 import com.android.asiantech.rx_mvvm_base.data.model.Comic
-import com.android.asiantech.rx_mvvm_base.data.source.ComicRepository
+import com.android.asiantech.rx_mvvm_base.data.source.Repository
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.FavoriteResponse
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.HomeResponse
 import com.android.asiantech.rx_mvvm_base.ui.main.home.HomeViewModel
@@ -31,14 +31,14 @@ class HomeViewModelTest : BaseTest() {
     val rule = RxSchedulersOverrideRule()
 
     @Mock
-    private lateinit var comicRepository: ComicRepository
+    private lateinit var repository: Repository
 
     private lateinit var viewModel: HomeViewModel
 
     @Before
     fun beforeTest() {
         MockitoAnnotations.initMocks(this)
-        viewModel = HomeViewModel(comicRepository)
+        viewModel = HomeViewModel(repository)
     }
 
     @Test
@@ -55,7 +55,7 @@ class HomeViewModelTest : BaseTest() {
     fun `Given nothing - When call getComicsFromServer() - Then return right list comic`() {
         /* Given */
         val test = TestObserver<MutableList<Comic>>()
-        `when`(comicRepository.getComics(1)).thenReturn(Single.just(HomeResponse(true,
+        `when`(repository.getComics(1)).thenReturn(Single.just(HomeResponse(true,
                 mutableListOf(Comic(1, "jindo", "football comic", "author", 100, true, 100, "url1"),
                         Comic(2, "jindodinho", "football comic", "author", 50, true, 100, "url2")))))
         viewModel.getComicsObservable().subscribe(test)
@@ -78,7 +78,7 @@ class HomeViewModelTest : BaseTest() {
         /* Given */
         val test = TestObserver<FavoriteResponse>()
         viewModel.getComics().add(Comic(1, "jindo", "football comic", "author", 100, true, 100, "url1"))
-        `when`(comicRepository.favorite(1)).thenReturn(Single.just(FavoriteResponse(true)))
+        `when`(repository.favorite(1)).thenReturn(Single.just(FavoriteResponse(true)))
 
         /* When */
         viewModel.favorite(0).subscribe(test)
@@ -95,7 +95,7 @@ class HomeViewModelTest : BaseTest() {
         /* Given */
         val test = TestObserver<FavoriteResponse>()
         viewModel.getComics().add(Comic(1, "jindo", "football comic", "author", 100, true, 100, "url1"))
-        `when`(comicRepository.unFavorite(1)).thenReturn(Single.just(FavoriteResponse(true)))
+        `when`(repository.unFavorite(1)).thenReturn(Single.just(FavoriteResponse(true)))
 
         /* When */
         viewModel.unFavorite(0).subscribe(test)
@@ -127,7 +127,7 @@ class HomeViewModelTest : BaseTest() {
         val visibleItemCount = 10
         val firstVisibleItem = 10
         val totalItemCount = 20
-        `when`(comicRepository.getComics(anyInt())).thenReturn(Single.just(HomeResponse(true,
+        `when`(repository.getComics(anyInt())).thenReturn(Single.just(HomeResponse(true,
                 mutableListOf(Comic(1, "jindo", "football comic", "author", 100, true, 100, "url1"),
                         Comic(2, "jindodinho", "football comic", "author", 50, true, 100, "url2")))))
         /* When */
@@ -148,11 +148,11 @@ class HomeViewModelTest : BaseTest() {
                 mutableListOf(Comic(1, "jindo", "football comic", "author", 100, true, 100, "url1"),
                         Comic(2, "jindodinho", "football comic", "author", 50, true, 100, "url2"))))
         val delayer = PublishSubject.create<Boolean>()
-        `when`(comicRepository.getComics(anyInt())).thenReturn(single)
+        `when`(repository.getComics(anyInt())).thenReturn(single)
 
         /* When */
         viewModel.getComicsFromServer()
-        `when`(comicRepository.getComics(anyInt())).thenReturn(single.delaySubscription(delayer))
+        `when`(repository.getComics(anyInt())).thenReturn(single.delaySubscription(delayer))
         viewModel.getComicsFromServer()
         viewModel.loadMore(visibleItemCount, totalItemCount, firstVisibleItem)
 
@@ -166,7 +166,7 @@ class HomeViewModelTest : BaseTest() {
         val visibleItemCount = 10
         val firstVisibleItem = 10
         val totalItemCount = 20
-        `when`(comicRepository.getComics(anyInt())).thenReturn(Single.just(HomeResponse(false,
+        `when`(repository.getComics(anyInt())).thenReturn(Single.just(HomeResponse(false,
                 mutableListOf(Comic(1, "jindo", "football comic", "author", 100, true, 100, "url1"),
                         Comic(2, "jindodinho", "football comic", "author", 50, true, 100, "url2")))))
         /* When */
@@ -188,12 +188,12 @@ class HomeViewModelTest : BaseTest() {
                 mutableListOf(Comic(1, "jindo", "football comic", "author", 100, true, 100, "url1"),
                         Comic(2, "jindodinho", "football comic", "author", 50, true, 100, "url2"))))
         val delayer = PublishSubject.create<Boolean>()
-        `when`(comicRepository.getComics(anyInt())).thenReturn(single)
+        `when`(repository.getComics(anyInt())).thenReturn(single)
 
         /* When */
         viewModel.updateProgressDialogStatus().subscribe(progressDialogTest)
         viewModel.getComicsFromServer()
-        `when`(comicRepository.getComics(anyInt())).thenReturn(single.delaySubscription(delayer))
+        `when`(repository.getComics(anyInt())).thenReturn(single.delaySubscription(delayer))
         viewModel.getComicsFromServer()
         viewModel.loadMore(visibleItemCount, totalItemCount, firstVisibleItem)
 
@@ -225,12 +225,12 @@ class HomeViewModelTest : BaseTest() {
                 mutableListOf(Comic(1, "jindo", "football comic", "author", 100, true, 100, "url1"),
                         Comic(2, "jindodinho", "football comic", "author", 50, true, 100, "url2"))))
         val delayer = PublishSubject.create<Boolean>()
-        `when`(comicRepository.getComics(anyInt())).thenReturn(single)
+        `when`(repository.getComics(anyInt())).thenReturn(single)
 
         /* When */
         viewModel.updateProgressDialogStatus().subscribe(progressDialogTest)
         viewModel.getComicsFromServer()
-        `when`(comicRepository.getComics(anyInt())).thenReturn(single.delaySubscription(delayer))
+        `when`(repository.getComics(anyInt())).thenReturn(single.delaySubscription(delayer))
         viewModel.getComicsFromServer()
         viewModel.loadMore(visibleItemCount, totalItemCount, firstVisibleItem)
 
@@ -258,7 +258,7 @@ class HomeViewModelTest : BaseTest() {
         val visibleItemCount = 10
         val firstVisibleItem = 10
         val totalItemCount = 100
-        `when`(comicRepository.getComics(anyInt())).thenReturn(Single.just(HomeResponse(true,
+        `when`(repository.getComics(anyInt())).thenReturn(Single.just(HomeResponse(true,
                 mutableListOf(Comic(1, "jindo", "football comic", "author", 100, true, 100, "url1"),
                         Comic(2, "jindodinho", "football comic", "author", 50, true, 100, "url2")))))
         /* When */

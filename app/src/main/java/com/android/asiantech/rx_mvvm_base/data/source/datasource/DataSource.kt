@@ -12,7 +12,7 @@ import io.reactivex.Single
  *
  * @author at-vinhhuynh
  */
-interface ComicDataSource {
+interface DataSource {
 
     /**
      * Login

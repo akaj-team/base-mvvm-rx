@@ -1,7 +1,7 @@
 package com.android.asiantech.rx_mvvm_base.datasource
 
 import com.android.asiantech.rx_mvvm_base.ApiSuiteTest
-import com.android.asiantech.rx_mvvm_base.data.source.remote.ComicRemoteDataSource
+import com.android.asiantech.rx_mvvm_base.data.source.remote.RemoteDataSource
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.FavoriteResponse
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.HomeResponse
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.LoginResponse
@@ -17,16 +17,16 @@ import org.junit.Test
  *
  * @author at-haingo
  */
-class ComicRemoteDataSourceTest {
+class RemoteDataSourceTest {
 
     @Test
-    fun `Given api - When call contructor  - Then has no exeption`() {
+    fun `Given api - When call constructor  - Then has no exeption`() {
         /* Given */
 
         /* When */
 
         /* Then */
-        Assert.assertThat(ComicRemoteDataSource(ApiSuiteTest.apiClient.service), CoreMatchers.notNullValue())
+        Assert.assertThat(RemoteDataSource(ApiSuiteTest.apiClient.service), CoreMatchers.notNullValue())
     }
 
     @Test
@@ -34,7 +34,7 @@ class ComicRemoteDataSourceTest {
         /* Given */
 
         /* When */
-        ComicRemoteDataSource()
+        RemoteDataSource()
 
         /* Then */
         assert(true)
@@ -47,7 +47,7 @@ class ComicRemoteDataSourceTest {
         ApiSuiteTest.server.addResponseBody("LoginResponse.json")
 
         /* When */
-        ComicRemoteDataSource(ApiSuiteTest.apiClient.service).login("test123@gmail.com", "password")
+        RemoteDataSource(ApiSuiteTest.apiClient.service).login("test123@gmail.com", "password")
                 .subscribe(loginTest)
 
         /* Then */
@@ -64,7 +64,7 @@ class ComicRemoteDataSourceTest {
         ApiSuiteTest.server.addResponseBody("SignUpResponse.json")
 
         /* When */
-        ComicRemoteDataSource(ApiSuiteTest.apiClient.service).register("test123@gmail.com", "password", "avatarUrl")
+        RemoteDataSource(ApiSuiteTest.apiClient.service).register("test123@gmail.com", "password", "avatarUrl")
                 .subscribe(registerTest)
 
         /* Then */
@@ -81,7 +81,7 @@ class ComicRemoteDataSourceTest {
         ApiSuiteTest.server.addResponseBody("HomeResponse.json")
 
         /* When */
-        ComicRemoteDataSource(ApiSuiteTest.apiClient.service).getComics(1)
+        RemoteDataSource(ApiSuiteTest.apiClient.service).getComics(1)
                 .subscribe(getComicsTest)
 
         /* Then */
@@ -100,7 +100,7 @@ class ComicRemoteDataSourceTest {
         ApiSuiteTest.server.addResponseBody("FavoriteResponse.json")
 
         /* When */
-        ComicRemoteDataSource(ApiSuiteTest.apiClient.service).favorite(1)
+        RemoteDataSource(ApiSuiteTest.apiClient.service).favorite(1)
                 .subscribe(favoriteTest)
 
         /* Then */
@@ -117,7 +117,7 @@ class ComicRemoteDataSourceTest {
         ApiSuiteTest.server.addResponseBody("FavoriteResponse.json")
 
         /* When */
-        ComicRemoteDataSource(ApiSuiteTest.apiClient.service).unFavorite(1)
+        RemoteDataSource(ApiSuiteTest.apiClient.service).unFavorite(1)
                 .subscribe(favoriteTest)
 
         /* Then */

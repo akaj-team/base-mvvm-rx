@@ -1,7 +1,7 @@
 package com.android.asiantech.rx_mvvm_base.ui.user.login
 
 import com.android.asiantech.rx_mvvm_base.data.source.LocalRepository
-import com.android.asiantech.rx_mvvm_base.data.source.ComicRepository
+import com.android.asiantech.rx_mvvm_base.data.source.Repository
 import com.android.asiantech.rx_mvvm_base.ui.user.register.RegisterViewModel
 import io.reactivex.subjects.BehaviorSubject
 import java.util.regex.Pattern
@@ -10,7 +10,7 @@ import java.util.regex.Pattern
  *
  * @author at-vinhhuynh
  */
-class LoginViewModel(private val comicRepository: ComicRepository, private val localRepository: LocalRepository) : LoginVMContract {
+class LoginViewModel(private val repository: Repository, private val localRepository: LocalRepository) : LoginVMContract {
 
     private var emailPattern = Pattern.compile(RegisterViewModel.EMAIL_VALIDATE_EXPRESSION, Pattern.CASE_INSENSITIVE)
     private val processDialogStatus = BehaviorSubject.create<Boolean>()
@@ -20,7 +20,7 @@ class LoginViewModel(private val comicRepository: ComicRepository, private val l
 
     override fun infoValidateStatus() = validateRegisterInformationStatus
 
-    override fun login(email: String, password: String) = comicRepository.login(email, password)
+    override fun login(email: String, password: String) = repository.login(email, password)
             .doOnSubscribe {
                 processDialogStatus.onNext(true)
             }.doFinally {

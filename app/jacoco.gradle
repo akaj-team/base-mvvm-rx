@@ -7,7 +7,7 @@ task jacocoTestReport(type: JacocoReport, dependsOn: 'testDebugUnitTest') {
         html.enabled = true
     }
 
-    def include = ['**/*ViewModel.*', '**/*ComicDataSource.**']
+    def include = ['**/*ViewModel.*', '**/*DataSource.**']
     def exclude = ['**/*Dummy*.*']
     def mainSrc = "${project.projectDir}/src/main/java"
 

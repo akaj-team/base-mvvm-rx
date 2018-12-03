@@ -1,6 +1,6 @@
 package com.android.asiantech.rx_mvvm_base.ui.user.register
 
-import com.android.asiantech.rx_mvvm_base.data.source.ComicRepository
+import com.android.asiantech.rx_mvvm_base.data.source.Repository
 import io.reactivex.subjects.BehaviorSubject
 import java.util.regex.Pattern
 
@@ -8,7 +8,7 @@ import java.util.regex.Pattern
  *
  * @author at-vinhhuynh
  */
-class RegisterViewModel(private val comicRepository: ComicRepository) : RegisterVMContract {
+class RegisterViewModel(private val repository: Repository) : RegisterVMContract {
 
     companion object {
         internal const val MIN_LENGTH_PASSWORD = 8
@@ -25,7 +25,7 @@ class RegisterViewModel(private val comicRepository: ComicRepository) : Register
     override fun infoValidateStatus() = validateRegisterInformationStatus
 
     override fun register(email: String, password: String, avatar: String) =
-            comicRepository.register(email, password, avatar)
+            repository.register(email, password, avatar)
                     .doOnSubscribe {
                         processDialogStatus.onNext(true)
                     }.doFinally {

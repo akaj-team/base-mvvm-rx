@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.android.asiantech.rx_mvvm_base.R
-import com.android.asiantech.rx_mvvm_base.data.source.ComicRepository
+import com.android.asiantech.rx_mvvm_base.data.source.Repository
 import com.android.asiantech.rx_mvvm_base.data.source.remote.network.ApiException
 import com.android.asiantech.rx_mvvm_base.extension.observeOnUiThread
 import com.android.asiantech.rx_mvvm_base.ui.base.BaseFragment
@@ -31,7 +31,7 @@ class HomeFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = HomeViewModel(ComicRepository())
+        viewModel = HomeViewModel(Repository())
         adapter = HomeAdapter(viewModel.getComics())
         adapter.onItemClicked = this::handleItemClicked
         adapter.onItemDoubleClicked = this::handleItemDoubleClicked

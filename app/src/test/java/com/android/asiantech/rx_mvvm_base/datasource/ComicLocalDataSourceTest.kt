@@ -17,35 +17,34 @@ import org.robolectric.annotation.Config
  */
 @RunWith(RobolectricTestRunner::class)
 @Config(manifest = Config.NONE)
-class LocalDataSourceTest : BaseTest() {
-    private lateinit var ComicLocalDataSource: ComicLocalDataSource
+class ComicLocalDataSourceTest : BaseTest() {
+    private lateinit var comicLocalDataSource: ComicLocalDataSource
 
     @Before
     fun beforeTest() {
-        ComicLocalDataSource = ComicLocalDataSource(RuntimeEnvironment.application.applicationContext)
+        comicLocalDataSource = ComicLocalDataSource(RuntimeEnvironment.application.applicationContext)
     }
 
     @Test
     fun `Given apiToken - When call getApiToken() - Then apiToken is correct`() {
         /* Given */
-        ComicLocalDataSource.saveApiToken("token")
+        comicLocalDataSource.saveApiToken("token")
 
         /* When */
 
         /* Then */
-        Assert.assertThat(ComicLocalDataSource.getApiToken(), `is`("token"))
+        Assert.assertThat(comicLocalDataSource.getApiToken(), `is`("token"))
     }
-
 
     @Test
     fun `Given apiToke - When call clearApiToken() - Then apiToken is empty `() {
         /* Given */
-        ComicLocalDataSource.saveApiToken("token")
+        comicLocalDataSource.saveApiToken("token")
 
         /* When */
-        ComicLocalDataSource.clearApiToken()
+        comicLocalDataSource.clearApiToken()
 
         /* Then */
-        Assert.assertThat(ComicLocalDataSource.getApiToken(), `is`(""))
+        Assert.assertThat(comicLocalDataSource.getApiToken(), `is`(""))
     }
 }
