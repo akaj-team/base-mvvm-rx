@@ -6,7 +6,6 @@ import com.android.asiantech.rx_mvvm_base.data.model.User
 import com.android.asiantech.rx_mvvm_base.data.source.Repository
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.FavoriteDataResponse
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.FavoriteResponse
-import com.android.asiantech.rx_mvvm_base.data.source.remote.response.ResultResponse
 import io.reactivex.Single
 import io.reactivex.subjects.BehaviorSubject
 import java.util.concurrent.atomic.AtomicInteger
@@ -72,17 +71,17 @@ class ProfileViewModel(private val repository: Repository) : ProfileVMContract {
                 mangas.addAll(it.mangaList)
             }
 
-    override fun updateFavorite(position: Int): Single<ResultResponse> {
+    override fun updateFavorite(position: Int): Single<FavoriteResponse> {
         val manga = mangas[position]
         return if (manga.likeFlag) {
-            repository.unStar(manga.id)
+            repository.unFavorite(manga.id)
                     .doOnSuccess {
                         if (it.success) {
                             manga.likeFlag = false
                         }
                     }
         } else {
-            repository.star(manga.id)
+            repository.favorite(manga.id)
                     .doOnSuccess {
                         if (it.success) {
                             manga.likeFlag = true

@@ -23,8 +23,4 @@ interface DataSource {
     fun getProfile(): Single<User>
 
     fun getFavoriteMangaList(page: Int): Single<FavoriteDataResponse>
-
-    fun star(id: Int): Single<ResultResponse>
-
-    fun unStar(id: Int): Single<ResultResponse>
 }

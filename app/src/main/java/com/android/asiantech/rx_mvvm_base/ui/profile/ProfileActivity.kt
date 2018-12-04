@@ -52,22 +52,23 @@ class ProfileActivity : BaseActivity() {
         adapter.onThumbnailClick = this::eventThumbnailMangaClicked
         adapter.onStarClick = this::eventStarClicked
         val gridLayoutManager = GridLayoutManager(this, COlUMN_NUMBERS)
-        recyclerView.layoutManager = gridLayoutManager
-        recyclerView.addItemDecoration(SpacesItemDecoration(resources.getDimensionPixelSize(R.dimen.profile_space_between_mange)))
-        recyclerView.adapter = adapter
-
-        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                val visibleItemCount = gridLayoutManager.childCount
-                val totalItemCount = gridLayoutManager.itemCount
-                val firstVisibleItem = gridLayoutManager.findFirstVisibleItemPosition()
-                viewModel.loadMore(visibleItemCount, totalItemCount, firstVisibleItem)
-                        ?.observeOnUiThread()
-                        ?.doAfterSuccess { adapter.notifyDataSetChanged() }
-                        ?.subscribe()
-            }
-        })
+        recyclerView.let {
+            it.layoutManager = gridLayoutManager
+            it.addItemDecoration(SpacesItemDecoration(resources.getDimensionPixelSize(R.dimen.profile_space_between_mange)))
+            it.adapter = adapter
+            it.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    val visibleItemCount = gridLayoutManager.childCount
+                    val totalItemCount = gridLayoutManager.itemCount
+                    val firstVisibleItem = gridLayoutManager.findFirstVisibleItemPosition()
+                    viewModel.loadMore(visibleItemCount, totalItemCount, firstVisibleItem)
+                            ?.observeOnUiThread()
+                            ?.doAfterSuccess { response -> adapter.notifyDataSetChanged() }
+                            ?.subscribe()
+                }
+            })
+        }
     }
 
     private fun initObservable() {
@@ -85,7 +86,6 @@ class ProfileActivity : BaseActivity() {
         compositeDisposable.add(
                 viewModel.getFavoriteMangaList()
                         .observeOnUiThread()
-                        .doAfterSuccess { }
                         .subscribe({ handleGetFavoriteMangasSuccess() }, this::handleGetUserProfileError))
     }
 

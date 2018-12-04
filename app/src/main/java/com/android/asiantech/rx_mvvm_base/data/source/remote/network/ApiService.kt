@@ -27,14 +27,6 @@ interface ApiService {
     @GET("/v1/user/favorite/favorite.php")
     fun getFavorite(@Query("page") page: Int): Single<FavoriteDataResponse>
 
-    @FormUrlEncoded
-    @POST("/v1/comic/favorite/star.php")
-    fun star(@Field("id") id: Int): Single<ResultResponse>
-
-    @FormUrlEncoded
-    @POST("/comic/favorite/unstar.php")
-    fun unStar(@Field("id") id: Int): Single<ResultResponse>
-
     @GET("v1/comic/home/home.php")
     fun getComics(@Query("page") page: Int): Single<HomeResponse>
 

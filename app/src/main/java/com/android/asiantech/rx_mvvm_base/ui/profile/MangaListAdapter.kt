@@ -54,15 +54,17 @@ class MangaListAdapter(private val mangas: MutableList<Manga>, private val conte
         }
 
         fun bind(manga: Manga) {
-            tvName?.text = manga.name
-            tvDescription?.text = manga.description
-            imgAvatar?.let {
-                Glide.with(context)
-                        .load(manga.thumbnail)
-                        .apply(RequestOptions().apply {
-                            override(mangaThumbnailWidth, mangaThumbnailHeight)
-                            centerCrop()
-                        }).into(it)
+            with(manga) {
+                tvName?.text = name
+                tvDescription?.text = description
+                imgAvatar?.let {
+                    Glide.with(context)
+                            .load(thumbnail)
+                            .apply(RequestOptions().apply {
+                                override(mangaThumbnailWidth, mangaThumbnailHeight)
+                                centerCrop()
+                            }).into(it)
+                }
             }
         }
     }
