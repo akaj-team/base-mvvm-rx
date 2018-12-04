@@ -13,5 +13,7 @@ class LocalRepository(context: Context) : LocalDataSource {
 
     override fun saveApiToken(apiToken: String) = localDataSource.saveApiToken(apiToken)
 
+    override fun clearApiToken() = localDataSource.clearApiToken()
+
     override fun getApiToken() = localDataSource.getApiToken()
 }

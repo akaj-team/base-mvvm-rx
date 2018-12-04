@@ -8,5 +8,7 @@ interface LocalDataSource {
 
     fun saveApiToken(apiToken: String)
 
+    fun clearApiToken()
+
     fun getApiToken(): String
 }

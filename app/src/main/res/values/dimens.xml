@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="profile_space_between_mange">2dp</dimen>
+    <dimen name="profile_avatar_size">100dp</dimen>
+    <dimen name="profile_thumbnai_manga_height">150dp</dimen>
+    <dimen name="home_fragment_recyclerview_grid_spacing">5dp</dimen>
+</resources>
