@@ -41,7 +41,7 @@ class ComicDetailFragment : BaseFragment() {
         with(comic) {
             tvComicName.text = name
             tvAuthor.text = author
-            tvComicIntroduction.text = introduction
+            tvComicIntroduction.text = description
         }
     }
 
