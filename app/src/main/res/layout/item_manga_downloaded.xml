@@ -31,11 +31,10 @@
 
             <TextView
                 android:id="@+id/tvDescription"
-                android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="That girl"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
                 android:textColor="@android:color/black" />
         </LinearLayout>
 
