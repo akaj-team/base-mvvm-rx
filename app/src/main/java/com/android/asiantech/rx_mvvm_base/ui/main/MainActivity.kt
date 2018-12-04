@@ -25,6 +25,10 @@ class MainActivity : BaseActivity() {
         initSearchQuery()
     }
 
+    override fun onBindViewModel() {
+        //No-op
+    }
+
     private fun initSearchQuery() {
         if (Intent.ACTION_SEARCH == intent.action) {
             intent.getStringExtra(SearchManager.QUERY)?.also { query ->

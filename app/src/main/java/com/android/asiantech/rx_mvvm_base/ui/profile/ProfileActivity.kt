@@ -12,16 +12,15 @@ import com.android.asiantech.rx_mvvm_base.extension.showAlert
 import com.android.asiantech.rx_mvvm_base.ui.base.BaseActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_profile.*
 
 /**
  * @author ChauHQ
  */
 class ProfileActivity : BaseActivity() {
+
     private lateinit var viewModel: ProfileVMContract
     private lateinit var adapter: MangaListAdapter
-    private var compositeDisposable = CompositeDisposable()
 
     companion object {
         private const val COlUMN_NUMBERS = 2
@@ -32,13 +31,20 @@ class ProfileActivity : BaseActivity() {
         setContentView(R.layout.activity_profile)
         viewModel = ProfileViewModel(Repository())
         initRecyclerView()
-        initObservable()
         initListener()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        compositeDisposable.clear()
+    override fun onBindViewModel() {
+        addDisposables(
+                viewModel.updateStateProgressBarObservable()
+                        .observeOnUiThread()
+                        .subscribe(this::handleStateProgressBar),
+                viewModel.getProfile()
+                        .observeOnUiThread()
+                        .subscribe(this::handleGetUserProfileSuccess, this::handleGetUserProfileError),
+                viewModel.getFavoriteMangaList()
+                        .observeOnUiThread()
+                        .subscribe({ handleGetFavoriteMangasSuccess() }, this::handleGetUserProfileError))
     }
 
     private fun initListener() {
@@ -69,24 +75,6 @@ class ProfileActivity : BaseActivity() {
                 }
             })
         }
-    }
-
-    private fun initObservable() {
-
-        compositeDisposable.add(
-                viewModel.updateStateProgressBarObservable()
-                        .observeOnUiThread()
-                        .subscribe(this::handleStateProgressBar))
-
-        compositeDisposable.add(
-                viewModel.getProfile()
-                        .observeOnUiThread()
-                        .subscribe(this::handleGetUserProfileSuccess, this::handleGetUserProfileError))
-
-        compositeDisposable.add(
-                viewModel.getFavoriteMangaList()
-                        .observeOnUiThread()
-                        .subscribe({ handleGetFavoriteMangasSuccess() }, this::handleGetUserProfileError))
     }
 
     private fun handleGetUserProfileSuccess(user: User) {
