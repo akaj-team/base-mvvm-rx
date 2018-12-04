@@ -5,6 +5,7 @@ import com.android.asiantech.rx_mvvm_base.data.model.User
 import com.android.asiantech.rx_mvvm_base.data.source.datasource.DataSource
 import com.android.asiantech.rx_mvvm_base.data.source.remote.network.ApiClient
 import com.android.asiantech.rx_mvvm_base.data.source.remote.network.ApiService
+import com.android.asiantech.rx_mvvm_base.data.source.remote.response.FavoriteDataResponse
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.FavoriteResponse
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.ResultResponse
 import io.reactivex.Single
@@ -21,9 +22,15 @@ class RemoteDataSource(private val api: ApiService) : DataSource {
 
     override fun register(email: String, password: String, avatar: String) = api.register(email, password, avatar)
 
+    override fun getComics(page: Int) = api.getComics(page)
+
+    override fun favorite(id: Int) = api.favorite(id)
+
+    override fun unFavorite(id: Int) = api.unFavorite(id)
+
     override fun getProfile(): Single<User> = api.getProfile()
 
-    override fun getFavoriteMangaList(page: Int): Single<FavoriteResponse> = api.getFavorite(page)
+    override fun getFavoriteMangaList(page: Int): Single<FavoriteDataResponse> = api.getFavorite(page)
 
     override fun star(id: Int): Single<ResultResponse> = api.star(id)
 

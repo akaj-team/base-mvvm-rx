@@ -1,13 +1,9 @@
 package com.android.asiantech.rx_mvvm_base.data.source.remote.network
 
 import com.android.asiantech.rx_mvvm_base.data.model.User
-import com.android.asiantech.rx_mvvm_base.data.source.remote.response.FavoriteResponse
-import com.android.asiantech.rx_mvvm_base.data.source.remote.response.LoginResponse
-import com.android.asiantech.rx_mvvm_base.data.source.remote.response.ResultResponse
-import com.android.asiantech.rx_mvvm_base.data.source.remote.response.SignUpResponse
+import com.android.asiantech.rx_mvvm_base.data.source.remote.response.*
 import io.reactivex.Single
 import retrofit2.http.*
-import java.net.ResponseCache
 
 /**
  *
@@ -29,7 +25,7 @@ interface ApiService {
     fun getProfile(): Single<User>
 
     @GET("/v1/user/favorite/favorite.php")
-    fun getFavorite(@Query("page") page: Int): Single<FavoriteResponse>
+    fun getFavorite(@Query("page") page: Int): Single<FavoriteDataResponse>
 
     @FormUrlEncoded
     @POST("/v1/comic/favorite/star.php")
@@ -38,4 +34,15 @@ interface ApiService {
     @FormUrlEncoded
     @POST("/comic/favorite/unstar.php")
     fun unStar(@Field("id") id: Int): Single<ResultResponse>
+
+    @GET("v1/comic/home/home.php")
+    fun getComics(@Query("page") page: Int): Single<HomeResponse>
+
+    @FormUrlEncoded
+    @POST("v1/comic/favorite/star.php")
+    fun favorite(@Field("id") id: Int): Single<FavoriteResponse>
+
+    @FormUrlEncoded
+    @POST("v1/comic/favorite/unstar.php")
+    fun unFavorite(@Field("id") id: Int): Single<FavoriteResponse>
 }

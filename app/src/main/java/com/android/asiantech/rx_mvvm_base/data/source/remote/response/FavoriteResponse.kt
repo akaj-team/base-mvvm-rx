@@ -4,7 +4,10 @@ import com.android.asiantech.rx_mvvm_base.data.model.Manga
 import com.google.gson.annotations.SerializedName
 
 /**
- * @author ChauHQ
+ *
+ * @author at-huongnguyen
  */
-data class FavoriteResponse(@SerializedName("next_page_flag") val nextPageFlag: Boolean,
+class FavoriteResponse(@SerializedName("success") val success: Boolean)
+
+data class FavoriteDataResponse(@SerializedName("next_page_flag") val nextPageFlag: Boolean,
                             @SerializedName("") val mangaList: List<Manga>)

@@ -4,6 +4,7 @@ import android.view.View
 import com.android.asiantech.rx_mvvm_base.data.model.Manga
 import com.android.asiantech.rx_mvvm_base.data.model.User
 import com.android.asiantech.rx_mvvm_base.data.source.Repository
+import com.android.asiantech.rx_mvvm_base.data.source.remote.response.FavoriteDataResponse
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.FavoriteResponse
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.ResultResponse
 import io.reactivex.Single
@@ -30,7 +31,7 @@ class ProfileViewModel(private val repository: Repository) : ProfileVMContract {
 
     override fun updateStateProgressBarObservable(): BehaviorSubject<Int> = updateStateProgressBarObservable
 
-    override fun loadMore(visibleItemCount: Int, totalItemCount: Int, firstVisibleItem: Int): Single<FavoriteResponse>? {
+    override fun loadMore(visibleItemCount: Int, totalItemCount: Int, firstVisibleItem: Int): Single<FavoriteDataResponse>? {
         if (canLoadMore(visibleItemCount, totalItemCount, firstVisibleItem)) {
             return getFavoriteMangaList()
         }
@@ -49,7 +50,7 @@ class ProfileViewModel(private val repository: Repository) : ProfileVMContract {
                 }
             }
 
-    override fun getFavoriteMangaList(): Single<FavoriteResponse> = repository.getFavoriteMangaList(page)
+    override fun getFavoriteMangaList(): Single<FavoriteDataResponse> = repository.getFavoriteMangaList(page)
             .doOnSubscribe {
                 count.incrementAndGet()
                 updateStateProgressBarObservable.onNext(View.VISIBLE)

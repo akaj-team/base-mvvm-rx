@@ -24,4 +24,7 @@ class LocalDataSource(private val context: Context) : LocalDataSource {
 
     override fun getApiToken(): String = pref.getString(KEY_API_TOKEN, "")
 
+    override fun clearApiToken() {
+        pref.edit().putString(KEY_API_TOKEN, "").apply()
+    }
 }
