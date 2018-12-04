@@ -4,6 +4,7 @@ import com.android.asiantech.rx_mvvm_base.data.model.User
 import com.android.asiantech.rx_mvvm_base.data.source.datasource.DataSource
 import com.android.asiantech.rx_mvvm_base.data.source.remote.RemoteDataSource
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.FavoriteDataResponse
+import com.android.asiantech.rx_mvvm_base.data.model.Comic
 import io.reactivex.Single
 
 /**
@@ -23,6 +24,8 @@ class Repository : DataSource {
     override fun favorite(id: Int) = remoteDataSource.favorite(id)
 
     override fun unFavorite(id: Int) = remoteDataSource.unFavorite(id)
+
+    override fun getComic(comicId: Int): Single<Comic> = remoteDataSource.getComic(comicId)
 
     override fun getProfile(): Single<User> = remoteDataSource.getProfile()
 

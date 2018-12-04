@@ -1,5 +1,10 @@
 package com.android.asiantech.rx_mvvm_base.data.source.datasource
 
+import com.android.asiantech.rx_mvvm_base.data.model.Comic
+import com.android.asiantech.rx_mvvm_base.data.source.remote.response.FavoriteResponse
+import com.android.asiantech.rx_mvvm_base.data.source.remote.response.HomeResponse
+import com.android.asiantech.rx_mvvm_base.data.source.remote.response.LoginResponse
+import com.android.asiantech.rx_mvvm_base.data.source.remote.response.SignUpResponse
 import io.reactivex.Single
 import com.android.asiantech.rx_mvvm_base.data.model.User
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.*
@@ -19,6 +24,8 @@ interface DataSource {
     fun favorite(id: Int): Single<FavoriteResponse>
 
     fun unFavorite(id: Int): Single<FavoriteResponse>
+
+    fun getComic(comicId: Int): Single<Comic>
 
     fun getProfile(): Single<User>
 
