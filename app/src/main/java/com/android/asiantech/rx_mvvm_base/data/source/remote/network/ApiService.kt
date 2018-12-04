@@ -1,5 +1,6 @@
 package com.android.asiantech.rx_mvvm_base.data.source.remote.network
 
+import com.android.asiantech.rx_mvvm_base.data.model.Comic
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.FavoriteResponse
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.HomeResponse
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.LoginResponse
@@ -33,4 +34,7 @@ interface ApiService {
     @FormUrlEncoded
     @POST("v1/comic/favorite/unstar.php")
     fun unFavorite(@Field("id") id: Int): Single<FavoriteResponse>
+
+    @GET("v1/comic/detail/detail.php")
+    fun getComic(@Query("id") id: Int): Single<Comic>
 }

@@ -1,8 +1,10 @@
 package com.android.asiantech.rx_mvvm_base.data.source.remote
 
+import com.android.asiantech.rx_mvvm_base.data.model.Comic
 import com.android.asiantech.rx_mvvm_base.data.source.datasource.DataSource
 import com.android.asiantech.rx_mvvm_base.data.source.remote.network.ApiClient
 import com.android.asiantech.rx_mvvm_base.data.source.remote.network.ApiService
+import io.reactivex.Single
 
 /**
  *
@@ -21,4 +23,6 @@ class RemoteDataSource(private val api: ApiService) : DataSource {
     override fun favorite(id: Int) = api.favorite(id)
 
     override fun unFavorite(id: Int) = api.unFavorite(id)
+
+    override fun getComic(comicId: Int): Single<Comic> = api.getComic(comicId)
 }
