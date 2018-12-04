@@ -9,7 +9,7 @@ import retrofit2.http.*
 
 /**
  *
- * @author at-vinhhuynh.
+ * @author at-haingo
  */
 interface ApiService {
 

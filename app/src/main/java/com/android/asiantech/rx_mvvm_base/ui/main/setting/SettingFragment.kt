@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_setting.*
 
 /**
  * Copyright © 2018 AsianTech inc.
- * Created by trung.nguyen on 10/4/18.
+ * @author at-haingo
  */
 class SettingFragment : BaseFragment() {
 

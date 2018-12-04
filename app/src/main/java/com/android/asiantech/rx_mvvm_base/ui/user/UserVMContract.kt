@@ -4,7 +4,7 @@ import io.reactivex.subjects.BehaviorSubject
 
 /**
  *
- * @author at-vinhhuynh
+ * @author at-haingo
  */
 interface UserVMContract {
 

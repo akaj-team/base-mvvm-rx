@@ -6,7 +6,7 @@ import com.android.asiantech.rx_mvvm_base.R
 
 /**
  *
- * @author at-vinhhuynh
+ * @author at-haingo
  */
 internal fun Context.showAlert(title: Int, message: String, onOkClick: () -> Unit = {}) {
     val alertBuilder = AlertDialog.Builder(this)

@@ -14,7 +14,9 @@ import com.android.asiantech.rx_mvvm_base.ui.main.home.HomeFragment
 import com.android.asiantech.rx_mvvm_base.ui.main.setting.SettingFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
-
+/**
+ * @author at-haingo
+ */
 class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

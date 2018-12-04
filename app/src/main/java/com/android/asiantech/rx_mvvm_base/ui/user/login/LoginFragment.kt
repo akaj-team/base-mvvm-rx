@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_login.*
 
 /**
  *
- * @author at-vinhhuynh
+ * @author at-haingo
  */
 class LoginFragment : BaseFragment() {
 

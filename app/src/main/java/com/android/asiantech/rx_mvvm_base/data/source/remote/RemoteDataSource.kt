@@ -9,7 +9,7 @@ import io.reactivex.subjects.PublishSubject
 
 /**
  *
- * @author at-vinhhuynh
+ * @author at-haingo
  */
 class RemoteDataSource(private val api: ApiService) : DataSource {
 

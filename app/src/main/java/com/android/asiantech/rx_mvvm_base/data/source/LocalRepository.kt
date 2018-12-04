@@ -6,7 +6,7 @@ import com.android.asiantech.rx_mvvm_base.data.source.local.ComicLocalDataSource
 
 /**
  *
- * @author at-vinhhuynh
+ * @author at-haingo
  */
 class LocalRepository(context: Context) : LocalDataSource {
 

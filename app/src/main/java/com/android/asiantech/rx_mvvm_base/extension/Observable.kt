@@ -7,7 +7,7 @@ import io.reactivex.schedulers.Schedulers
 
 /**
  * Use this extension for Observable
- * @author at-tienhoang
+ * @author at-haingo
  */
 internal fun <T> Observable<T>.observeOnUiThread(): Observable<T>
         = this.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())

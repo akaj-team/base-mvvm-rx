@@ -10,7 +10,7 @@ import io.reactivex.Single
 
 /**
  *
- * @author at-vinhhuynh
+ * @author at-haingo
  */
 interface DataSource {
 

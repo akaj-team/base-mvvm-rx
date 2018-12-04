@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
  * Copyright © 2018 AsianTech inc.
- * Created by trung.nguyen on 10/4/18.
+ * @author at-haingo
  */
 class HomeFragment : BaseFragment() {
 

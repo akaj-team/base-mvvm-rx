@@ -8,8 +8,9 @@ import retrofit2.CallAdapter
 import retrofit2.Retrofit
 import java.lang.reflect.Type
 
-/**vinhhuynh
+/**
  * Override this class to handle http exception and convert api success to error
+ * @author at-haingo
  */
 open class BaseRxCallAdapterWrapper<R>(private val type: Type, private val retrofit: Retrofit, private val wrapped: CallAdapter<R, *>?) : CallAdapter<R, Any> {
 

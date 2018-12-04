@@ -10,7 +10,7 @@ import javax.net.ssl.HttpsURLConnection
 
 /**
  *
- * @author at-hoavo.
+ * @author at-haingo.
  */
 class RxCallAdapterWrapper<R>(type: Type, retrofit: Retrofit, wrapped: CallAdapter<R, *>?) : BaseRxCallAdapterWrapper<R>(type, retrofit, wrapped) {
 

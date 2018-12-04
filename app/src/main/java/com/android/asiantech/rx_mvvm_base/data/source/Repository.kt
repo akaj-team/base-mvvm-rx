@@ -11,7 +11,7 @@ import io.reactivex.functions.BiFunction
 
 /**
  *
- * @author at-vinhhuynh
+ * @author at-haingo
  */
 class Repository : DataSource {
 

@@ -4,6 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 /**
  *
- * @author at-vinhhuynh
+ * @author at-haingo
  */
 class LoginResponse(@SerializedName("access_token") val accessToken: String)

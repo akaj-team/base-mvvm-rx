@@ -2,7 +2,7 @@ package com.android.asiantech.rx_mvvm_base.data.source.datasource
 
 /**
  *
- * @author at-vinhhuynh
+ * @author at-haingo
  */
 interface LocalDataSource {
 

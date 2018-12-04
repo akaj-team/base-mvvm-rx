@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit
 
 /**
  *
- * @author at-vinhhuynh.
+ * @author at-haingo
  */
 open class ApiClient private constructor(url: String? = null) {
 

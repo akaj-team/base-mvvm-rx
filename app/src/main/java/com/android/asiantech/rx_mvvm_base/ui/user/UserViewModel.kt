@@ -5,7 +5,7 @@ import io.reactivex.subjects.BehaviorSubject
 
 /**
  *
- * @author at-vinhhuynh
+ * @author at-haingo
  */
 class UserViewModel(private val localRepository: LocalRepository) : UserVMContract {
 

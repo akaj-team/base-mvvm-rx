@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_register.*
 
 /**
  *
- * @author at-vinhhuynh
+ * @author at-haingo
  */
 class RegisterFragment : BaseFragment() {
 

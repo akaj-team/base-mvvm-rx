@@ -9,7 +9,7 @@ import com.android.asiantech.rx_mvvm_base.ui.base.BaseFragment
 
 /**
  * Copyright © 2018 AsianTech inc.
- * Created by trung.nguyen on 10/4/18.
+ * @author at-haingo
  */
 class FavoriteFragment : BaseFragment() {
 

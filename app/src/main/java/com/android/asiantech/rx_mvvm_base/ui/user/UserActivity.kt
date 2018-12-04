@@ -1,7 +1,9 @@
 package com.android.asiantech.rx_mvvm_base.ui.user
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import com.android.asiantech.rx_mvvm_base.R
 import com.android.asiantech.rx_mvvm_base.data.source.LocalRepository
 import com.android.asiantech.rx_mvvm_base.extension.addFragment
@@ -15,11 +17,12 @@ import com.android.asiantech.rx_mvvm_base.extension.animSlideInRightSlideOutRigh
 
 /**
  *
- * @author at-vinhhuynh
+ * @author at-haingo
  */
 class UserActivity : BaseActivity() {
     private lateinit var viewModel: UserVMContract
 
+    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
