@@ -5,6 +5,8 @@ import com.android.asiantech.rx_mvvm_base.data.source.datasource.DataSource
 import com.android.asiantech.rx_mvvm_base.data.source.remote.network.ApiClient
 import com.android.asiantech.rx_mvvm_base.data.source.remote.network.ApiService
 import io.reactivex.Single
+import com.android.asiantech.rx_mvvm_base.data.model.User
+import com.android.asiantech.rx_mvvm_base.data.source.remote.response.FavoriteDataResponse
 
 /**
  *
@@ -25,4 +27,8 @@ class RemoteDataSource(private val api: ApiService) : DataSource {
     override fun unFavorite(id: Int) = api.unFavorite(id)
 
     override fun getComic(comicId: Int): Single<Comic> = api.getComic(comicId)
+
+    override fun getProfile(): Single<User> = api.getProfile()
+
+    override fun getFavoriteMangaList(page: Int): Single<FavoriteDataResponse> = api.getFavorite(page)
 }
