@@ -83,3 +83,4 @@ workflows:
               crashlyticsUploadDistributionDebug \
               deleteFabricKey \
               :app:uploadDeployGateDebug
+
