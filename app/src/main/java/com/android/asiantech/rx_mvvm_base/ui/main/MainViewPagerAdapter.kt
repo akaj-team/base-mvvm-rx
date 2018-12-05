@@ -10,18 +10,18 @@ import android.support.v4.app.FragmentPagerAdapter
  */
 class MainViewPagerAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
 
-    private val mFragmentList = mutableListOf<Fragment>()
-    private val mFragmentTitleList = mutableListOf<String>()
+    private val fragmentList = mutableListOf<Fragment>()
+    private val fragmentTitleList = mutableListOf<String>()
 
-    override fun getItem(position: Int) = mFragmentList[position]
+    override fun getItem(position: Int) = fragmentList[position]
 
 
-    override fun getCount() = mFragmentList.size
+    override fun getCount() = fragmentList.size
 
-    override fun getPageTitle(position: Int) = mFragmentTitleList[position]
+    override fun getPageTitle(position: Int) = fragmentTitleList[position]
 
     fun addFrag(fragment: Fragment, title: String) {
-        mFragmentList.add(fragment)
-        mFragmentTitleList.add(title)
+        fragmentList.add(fragment)
+        fragmentTitleList.add(title)
     }
 }
