@@ -9,6 +9,8 @@
     <string name="loginFragmentTvWelcomeTitle">Welcome</string>
     <string name="signUp">Sign up</string>
     <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="profile">Profile</string>
     <string name="ok">OK</string>
     <string name="error">Error</string>
     <string name="success">Success</string>
@@ -18,5 +20,7 @@
     <string name="title_home">Home</string>
     <string name="title_favorite">Favorite</string>
     <string name="title_setting">Setting</string>
+    <string name="title_profile">Profile</string>
+    <string name="profile_downloaded">Downloaded</string>
     <string name="no_result">No Result</string>
 </resources>

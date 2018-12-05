@@ -18,6 +18,17 @@ android {
     }
 
     signingConfigs {
+        debug {
+            storeFile file('../keystores/debug.jks')
+        }
+        production {
+            if (System.getenv('CI')) {
+                storeFile file("../keystores/release.jks")
+                storePassword ""
+                keyAlias ""
+                keyPassword ""
+            }
+        }
     }
 
     buildTypes {
@@ -28,17 +39,19 @@ android {
         }
 
         release {
+            debuggable false
             minifyEnabled false
+            signingConfig signingConfigs.production
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
     applicationVariants.all { variant ->
         switch (variant.getName()) {
-            case "debug": //Level 5
+            case "debug":
                 variant.buildConfigField "String", "BASE_API_URL", '"https://at-android-comic.000webhostapp.com/api/"'
                 break
-            case "staging": //Level 4
+            case "release":
                 variant.buildConfigField "String", "BASE_API_URL", '"https://at-android-comic.000webhostapp.com/api/"'
                 break
         }
@@ -79,3 +92,6 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxjava:2.1.5'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
 }
+
+//apply from: "https://raw.githubusercontent.com/tientun/gradle-android-ci-check/master/ci.gradle"
+apply from: "../ci-java.gradle"
