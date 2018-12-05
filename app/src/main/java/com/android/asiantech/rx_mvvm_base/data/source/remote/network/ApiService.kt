@@ -1,11 +1,13 @@
 package com.android.asiantech.rx_mvvm_base.data.source.remote.network
 
+import com.android.asiantech.rx_mvvm_base.data.source.remote.response.ListFavoritesResponse
 import com.android.asiantech.rx_mvvm_base.data.model.Comic
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.FavoriteResponse
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.HomeResponse
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.LoginResponse
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.SignUpResponse
 import io.reactivex.Single
+import retrofit2.http.*
 import retrofit2.http.*
 import com.android.asiantech.rx_mvvm_base.data.model.User
 import com.android.asiantech.rx_mvvm_base.data.source.remote.response.*
@@ -45,4 +47,7 @@ interface ApiService {
 
     @GET("v1/comic/detail/detail.php")
     fun getComic(@Query("id") id: Int): Single<Comic>
+
+    @GET("v1/user/favorite/favorite.php")
+    fun getListFavorites(@Query("page") page: Int): Single<ListFavoritesResponse>
 }
