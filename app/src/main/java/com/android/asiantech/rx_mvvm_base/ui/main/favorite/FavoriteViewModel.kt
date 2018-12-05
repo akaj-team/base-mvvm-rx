@@ -10,7 +10,7 @@ import io.reactivex.subjects.BehaviorSubject
  * Copyright © 2018 AsianTech inc.
  * Created by TaiND on 10/31/18.
  */
-class FavoriteViewModel(private val repository: Repository) : FavoriteContract {
+class FavoriteViewModel(private val repository: Repository) : FavoriteVMContract {
 
     companion object {
         private const val VISIBLE_THRESHOLD = 5

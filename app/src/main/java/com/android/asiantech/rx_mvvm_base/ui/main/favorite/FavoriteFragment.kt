@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_favorite.*
  */
 class FavoriteFragment : BaseFragment() {
 
-    private lateinit var viewModel: FavoriteContract
+    private lateinit var viewModel: FavoriteVMContract
     private lateinit var adapter: FavoriteAdapter
     private lateinit var progressDialog: ProgressDialog
 

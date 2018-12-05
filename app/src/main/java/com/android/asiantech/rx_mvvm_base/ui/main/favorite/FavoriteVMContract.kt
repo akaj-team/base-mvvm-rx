@@ -9,7 +9,7 @@ import io.reactivex.subjects.BehaviorSubject
  * Copyright © 2018 AsianTech inc.
  * Created by TaiND on 10/31/18.
  */
-interface FavoriteContract {
+interface FavoriteVMContract {
     fun getFavoriteComics(): List<Comic>
 
     fun getFavoriteComicsFromServer(): Single<ListFavoritesResponse>
