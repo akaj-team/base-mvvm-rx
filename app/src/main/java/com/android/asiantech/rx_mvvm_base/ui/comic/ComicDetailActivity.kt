@@ -1,29 +1,24 @@
 package com.android.asiantech.rx_mvvm_base.ui.comic
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.android.asiantech.rx_mvvm_base.R
 import com.android.asiantech.rx_mvvm_base.data.model.Comic
 import com.android.asiantech.rx_mvvm_base.data.source.Repository
 import com.android.asiantech.rx_mvvm_base.data.source.remote.network.ApiException
 import com.android.asiantech.rx_mvvm_base.extension.observeOnUiThread
 import com.android.asiantech.rx_mvvm_base.extension.showAlert
-import com.android.asiantech.rx_mvvm_base.ui.base.BaseFragment
+import com.android.asiantech.rx_mvvm_base.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.fragment_comic_detail.*
 
-class ComicDetailFragment : BaseFragment() {
+class ComicDetailActivity : BaseActivity() {
     private lateinit var viewModel: ComicDetailVMContract
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.fragment_comic_detail)
         // Init viewModel
         viewModel = ComicDetailViewModel(Repository())
-    }
-
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.fragment_comic_detail, container, false)
     }
 
     override fun onBindViewModel() {
@@ -50,6 +45,6 @@ class ComicDetailFragment : BaseFragment() {
     }
 
     private fun onErrorMessageStatus(error: Throwable) {
-        context.showAlert(R.string.error, (error as ApiException).errorMessage)
+        showAlert(R.string.error, (error as ApiException).errorMessage)
     }
 }
