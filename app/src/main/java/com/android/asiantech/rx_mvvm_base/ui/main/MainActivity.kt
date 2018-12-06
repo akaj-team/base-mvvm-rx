@@ -9,8 +9,8 @@ import android.view.Menu
 import android.view.MenuItem
 import com.android.asiantech.rx_mvvm_base.R
 import com.android.asiantech.rx_mvvm_base.ui.base.BaseActivity
+import com.android.asiantech.rx_mvvm_base.ui.comic.ComicDetailFragment
 import com.android.asiantech.rx_mvvm_base.ui.main.favorite.FavoriteFragment
-import com.android.asiantech.rx_mvvm_base.ui.main.home.HomeFragment
 import com.android.asiantech.rx_mvvm_base.ui.main.setting.SettingFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -42,7 +42,9 @@ class MainActivity : BaseActivity() {
         supportActionBar?.setTitle(R.string.title_home)
 
         val adapter = MainViewPagerAdapter(supportFragmentManager)
-        adapter.addFrag(HomeFragment(), getString(R.string.title_home))
+//        adapter.addFrag(HomeFragment(), getString(R.string.title_home))
+        // TODO: Remove this line later, just test show comic detail screen
+        adapter.addFrag(ComicDetailFragment(), getString(R.string.title_home))
         adapter.addFrag(FavoriteFragment(), getString(R.string.title_favorite))
         adapter.addFrag(SettingFragment(), getString(R.string.title_setting))
         viewPager.adapter = adapter
