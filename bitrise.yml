@@ -79,8 +79,4 @@ workflows:
           inputs:
           - content: |-
               ./gradlew :app:assembleDebug \
-              generalFabricKey \
               crashlyticsUploadDistributionDebug \
-              deleteFabricKey \
-              :app:uploadDeployGateDebug
-
