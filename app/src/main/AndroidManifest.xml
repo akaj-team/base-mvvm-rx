@@ -29,6 +29,10 @@
                 android:resource="@xml/searchable" />
         </activity>
 
-        <activity android:name=".ui.profile.ProfileActivity"/>
+        <activity android:name=".ui.profile.ProfileActivity" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="bba35403b29d2a3c14f2799e70744a1913419e35" />
     </application>
 </manifest>

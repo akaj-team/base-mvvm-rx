@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
+    <issue id="SpUsage" severity="ignore" />
+
+    <issue id="InvalidPackage">
+        <ignore regexp="lombok-.*.jar"/>
+    </issue>
+
     <issue id="ContentDescription" severity="ignore"/>
     <issue id="IconDensities" severity="ignore"/>
     <issue id="SpUsage" severity="ignore"/>
@@ -14,4 +20,7 @@
     <issue id="StringFormatMatches" severity="ignore"/>
     <issue id="StringFormatInvalid" severity="ignore"/>
     <issue id="UnusedResources" severity="ignore"/>
+    <issue id="RelativeOverlap" severity="ignore"/>
+    <issue id="ParcelCreator" severity="ignore"/>
+    <issue id="CheckResult" severity="ignore"/>
 </lint>
