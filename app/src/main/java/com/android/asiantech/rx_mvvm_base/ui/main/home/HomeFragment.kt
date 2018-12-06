@@ -6,6 +6,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
+import com.android.asiantech.rx_mvvm_base.data.model.Comic
 import android.view.ViewGroup
 import android.widget.Toast
 import com.android.asiantech.rx_mvvm_base.R
@@ -86,7 +87,7 @@ class HomeFragment : BaseFragment() {
     }
 
     @SuppressWarnings("checkResult")
-    private fun handleItemDoubleClicked(position: Int) {
+    private fun handleItemDoubleClicked(position:Int) {
         if (viewModel.isFavorite(position)) {
             viewModel.unFavorite(position)
                     .observeOnUiThread()
