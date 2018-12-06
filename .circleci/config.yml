@@ -75,11 +75,11 @@ jobs:
           name: Run danger
           command: bundle exec danger
 
-  workflows:
-    version: 2
-    check_and_report:
-      jobs:
-        - check
-        - reportToPullRequest:
-            requires:
-              - check
+#workflows:
+#    version: 2
+#    check_and_report:
+#      jobs:
+#        - check
+#        - reportToPullRequest:
+#            requires:
+#              - check
