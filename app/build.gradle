@@ -56,6 +56,12 @@ android {
                 break
         }
     }
+
+    lintOptions {
+        abortOnError false
+        lintConfig file('lint.xml')
+        xmlOutput file("${buildDir}/reports/lint-results.xml")
+    }
 }
 
 dependencies {
@@ -95,3 +101,4 @@ dependencies {
 
 //apply from: "https://raw.githubusercontent.com/tientun/gradle-android-ci-check/master/ci.gradle"
 apply from: "../ci-java.gradle"
+apply from: "ci-kotlin.gradle"
