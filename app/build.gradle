@@ -114,7 +114,6 @@ dependencies {
         transitive = true
     }
 }
-
 //apply from: "https://raw.githubusercontent.com/tientun/gradle-android-ci-check/master/ci.gradle"
 apply from: "../ci-java.gradle"
 apply from: "ci-kotlin.gradle"
