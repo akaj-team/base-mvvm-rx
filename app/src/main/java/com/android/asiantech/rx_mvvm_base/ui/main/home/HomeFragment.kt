@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import io.reactivex.subjects.BehaviorSubject
 import android.widget.Toast
 import com.android.asiantech.rx_mvvm_base.R
 import com.android.asiantech.rx_mvvm_base.data.source.Repository
@@ -25,7 +24,7 @@ class HomeFragment : BaseFragment() {
     companion object {
         private const val GIRD_COLUMN = 2
     }
-    
+
     private lateinit var viewModel: HomeVMContract
     private lateinit var adapter: HomeAdapter
     private lateinit var progressDialog: ProgressDialog
@@ -82,7 +81,7 @@ class HomeFragment : BaseFragment() {
         progressDialog.setCancelable(false)
     }
 
-    private fun handleItemClicked(position:Int) {
+    private fun handleItemClicked(position: Int) {
         //Todo: Open Detail Screen
     }
 
