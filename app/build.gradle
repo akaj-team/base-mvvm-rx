@@ -58,6 +58,12 @@ android {
                 break
         }
     }
+
+    lintOptions {
+        abortOnError false
+        lintConfig file('lint.xml')
+        xmlOutput file("${buildDir}/reports/lint-results.xml")
+    }
 }
 
 repositories {
