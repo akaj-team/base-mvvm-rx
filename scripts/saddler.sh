@@ -7,12 +7,12 @@ else
     REPORTER=Saddler::Reporter::Github::PullRequestReviewComment
 fi
 
-echo "********************"
-echo "* checkstyle       *"
-echo "********************"
-cat app/build/reports/checkstyle/checkstyle.xml \
-    | bundle exec checkstyle_filter-git diff origin/master \
-    | bundle exec saddler report --require saddler/reporter/github --reporter $REPORTER
+#echo "********************"
+#echo "* checkstyle       *"
+#echo "********************"
+#cat app/build/reports/checkstyle/checkstyle.xml \
+#    | bundle exec checkstyle_filter-git diff origin/master \
+#    | bundle exec saddler report --require saddler/reporter/github --reporter $REPORTER
 
 echo "********************"
 echo "* findbugs         *"
