@@ -116,14 +116,12 @@ class HomeFragment : BaseFragment() {
 
     private fun handleFavoriteSuccess(success: Boolean, position: Int) {
         if (success) {
-            viewModel.getComics()[position].likeFlag = true
             adapter.notifyItemChanged(position)
         }
     }
 
     private fun handleUnFavoriteSuccess(success: Boolean, position: Int) {
         if (success) {
-            viewModel.getComics()[position].likeFlag = false
             adapter.notifyItemChanged(position)
         }
     }

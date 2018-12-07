@@ -59,8 +59,18 @@ class HomeViewModel(private val repository: Repository) : HomeVMContract {
     override fun updateProgressDialogStatus() = progressDialogStatus
 
     override fun favorite(position: Int) = repository.favorite(comics[position].id)
+            .doOnSuccess {
+                if (it.success) {
+                    comics[position].likeFlag = true
+                }
+            }
 
     override fun unFavorite(position: Int) = repository.unFavorite(comics[position].id)
+            .doOnSuccess {
+                if (it.success) {
+                    comics[position].likeFlag = false
+                }
+            }
 
     override fun isFavorite(position: Int) = comics[position].likeFlag
 
