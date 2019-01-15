@@ -6,9 +6,9 @@ import com.android.asiantech.rx_mvvm_base.data.source.datasource.LocalDataSource
 
 /**
  *
- * @author at-vinhhuynh
+ * @author at-haingo
  */
-class LocalDataSource(private val context: Context) : LocalDataSource {
+class ComicLocalDataSource(private val context: Context) : LocalDataSource {
 
     companion object {
         private const val KEY_API_TOKEN = "KEY_API_TOKEN"

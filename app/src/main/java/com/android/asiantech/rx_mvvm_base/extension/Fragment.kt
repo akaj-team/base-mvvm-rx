@@ -8,7 +8,7 @@ import com.android.asiantech.rx_mvvm_base.R
 
 /**
  *
- * @author at-vinhhuynh
+ * @author at-haingo
  */
 internal fun Fragment.getCurrentFragment(@IdRes containerId: Int) = childFragmentManager.findFragmentById(containerId)
 

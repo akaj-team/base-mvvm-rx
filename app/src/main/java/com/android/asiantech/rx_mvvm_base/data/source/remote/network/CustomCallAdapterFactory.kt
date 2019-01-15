@@ -8,7 +8,7 @@ import java.lang.reflect.Type
 
 /**
  *
- * @author at-hoavo.
+ * @author at-haingo
  */
 class CustomCallAdapterFactory : CallAdapter.Factory() {
     private var original: RxJava2CallAdapterFactory = RxJava2CallAdapterFactory.create()

@@ -9,7 +9,7 @@ import android.util.DisplayMetrics
 
 /**
  *
- * @author at-vinhhuynh
+ * @author at-haingo
  */
 internal fun Context.showAlert(title: Int? = null, message: String?, onOkClick: () -> Unit = {}) {
     val alertBuilder = AlertDialog.Builder(this)

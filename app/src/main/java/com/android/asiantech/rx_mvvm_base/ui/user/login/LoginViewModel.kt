@@ -8,7 +8,7 @@ import java.util.regex.Pattern
 
 /**
  *
- * @author at-vinhhuynh
+ * @author at-haingo
  */
 class LoginViewModel(private val repository: Repository, private val localRepository: LocalRepository) : LoginVMContract {
 

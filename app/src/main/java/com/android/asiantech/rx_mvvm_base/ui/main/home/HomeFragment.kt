@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
  * Copyright © 2018 AsianTech inc.
- * Created by trung.nguyen on 10/4/18.
+ * @author at-haingo
  */
 class HomeFragment : BaseFragment() {
 
@@ -116,14 +116,12 @@ class HomeFragment : BaseFragment() {
 
     private fun handleFavoriteSuccess(success: Boolean, position: Int) {
         if (success) {
-            viewModel.getComics()[position].likeFlag = true
             adapter.notifyItemChanged(position)
         }
     }
 
     private fun handleUnFavoriteSuccess(success: Boolean, position: Int) {
         if (success) {
-            viewModel.getComics()[position].likeFlag = false
             adapter.notifyItemChanged(position)
         }
     }

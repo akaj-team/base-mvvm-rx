@@ -5,7 +5,7 @@ import retrofit2.Response
 
 /**
  *
- * @author at-vinhhuynh.
+ * @author at-haingo
  */
 class CallBackApi private constructor() {
     companion object {

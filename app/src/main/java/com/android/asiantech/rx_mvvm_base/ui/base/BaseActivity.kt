@@ -4,6 +4,6 @@ import android.support.v7.app.AppCompatActivity
 
 /**
  *
- * @author at-vinhhuynh
+ * @author at-haingo
  */
 abstract class BaseActivity : AppCompatActivity()

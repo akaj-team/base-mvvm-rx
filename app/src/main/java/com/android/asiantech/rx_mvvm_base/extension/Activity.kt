@@ -10,7 +10,7 @@ import com.android.asiantech.rx_mvvm_base.ui.base.BaseFragment
 
 /**
  *
- * @author at-vinhhuynh
+ * @author at-haingo
  */
 internal fun FragmentActivity.replaceFragment(@IdRes containerId: Int, fragment: Fragment,
                                               t: (transaction: FragmentTransaction) -> Unit = {},

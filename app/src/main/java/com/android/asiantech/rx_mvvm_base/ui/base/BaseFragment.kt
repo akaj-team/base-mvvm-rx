@@ -6,7 +6,7 @@ import io.reactivex.disposables.Disposable
 
 /**
  *
- * @author at-vinhhuynh
+ * @author at-haingo
  */
 abstract class BaseFragment : Fragment() {
     private val subscription: CompositeDisposable = CompositeDisposable()

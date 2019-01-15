@@ -5,7 +5,7 @@ import io.reactivex.subjects.PublishSubject
 
 /**
  *
- * @author at-hoavo.
+ * @author at-haingo
  */
 object RxBus {
     private val publisher = PublishSubject.create<Any>()

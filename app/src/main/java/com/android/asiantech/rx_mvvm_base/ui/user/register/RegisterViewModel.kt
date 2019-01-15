@@ -6,7 +6,7 @@ import java.util.regex.Pattern
 
 /**
  *
- * @author at-vinhhuynh
+ * @author at-haingo
  */
 class RegisterViewModel(private val repository: Repository) : RegisterVMContract {
 

@@ -12,7 +12,7 @@ import javax.net.ssl.HttpsURLConnection
 
 /**
  *
- * @author at-hoavo.
+ * @author at-haingo
  */
 interface CustomCallback<T> {
     /** Called for [200] responses.  */
