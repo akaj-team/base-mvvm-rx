@@ -69,7 +69,6 @@ android {
         unitTests.all {
             setIgnoreFailures(true)
             include "**/*Test.class"
-            exclude "**/datasource/*RemoteDataSourceTest.class"
         }
         unitTests.returnDefaultValues = true
     }
