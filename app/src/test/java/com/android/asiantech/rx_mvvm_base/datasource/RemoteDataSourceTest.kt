@@ -125,15 +125,4 @@ class RemoteDataSourceTest {
             true
         }
     }
-
-    @Test
-    fun `Given nothing - When call getUser() - Then response is correct`() {
-        /* Given */
-
-        /* When */
-        RemoteDataSource(ApiSuiteTest.apiClient.service).getUser()
-
-        /* Then */
-        Assert.assertTrue(true)
-    }
 }
