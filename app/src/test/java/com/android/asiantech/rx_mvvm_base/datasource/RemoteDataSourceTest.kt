@@ -20,7 +20,7 @@ import org.junit.Test
 class RemoteDataSourceTest {
 
     @Test
-    fun `Given api - When call constructor  - Then has no exeption`() {
+    fun `Given api - When call constructor  - Then has no exception`() {
         /* Given */
 
         /* When */
