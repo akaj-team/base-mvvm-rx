@@ -24,7 +24,7 @@ class HomeFragment : BaseFragment() {
     companion object {
         private const val GIRD_COLUMN = 2
     }
-    
+
     private lateinit var viewModel: HomeVMContract
     private lateinit var adapter: HomeAdapter
     private lateinit var progressDialog: ProgressDialog

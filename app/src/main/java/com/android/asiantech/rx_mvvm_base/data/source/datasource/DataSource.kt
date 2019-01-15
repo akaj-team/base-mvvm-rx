@@ -1,16 +1,13 @@
 package com.android.asiantech.rx_mvvm_base.data.source.datasource
 
+import com.android.asiantech.rx_mvvm_base.data.model.Comic
 import com.android.asiantech.rx_mvvm_base.data.model.User
-import com.android.asiantech.rx_mvvm_base.data.source.remote.response.FavoriteResponse
-import com.android.asiantech.rx_mvvm_base.data.source.remote.response.HomeResponse
-import com.android.asiantech.rx_mvvm_base.data.source.remote.response.LoginResponse
-import com.android.asiantech.rx_mvvm_base.data.source.remote.response.SignUpResponse
-import io.reactivex.Observable
+import com.android.asiantech.rx_mvvm_base.data.source.remote.response.*
 import io.reactivex.Single
 
 /**
  *
- * @author at-haingo
+ * @author at-vinhhuynh
  */
 interface DataSource {
 
@@ -48,9 +45,11 @@ interface DataSource {
      */
     fun unFavorite(id: Int): Single<FavoriteResponse>
 
-    /**
-     * Get user information
-     * @return user information
-     */
-    fun getUser(): Observable<User>
+    fun getComic(comicId: Int): Single<Comic>
+
+    fun getProfile(): Single<User>
+
+    fun getFavoriteMangaList(page: Int): Single<FavoriteDataResponse>
+
+    fun getListFavorites(page: Int): Single<ListFavoritesResponse>
 }
